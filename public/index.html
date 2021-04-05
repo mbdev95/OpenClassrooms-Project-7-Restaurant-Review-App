@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <title>Restaurant Review Finder</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      const spinCutlery = () => {
+          setTimeout( function(){
+              document.querySelector("header div:first-child img[alt$='knife']:nth-child(1)").style.transform = "rotate(180deg)";
+              document.querySelector("header div:first-child img[alt$='knife']:nth-child(2)").style.transform = "rotate(-90deg)";
+              document.querySelector("header div:first-child img[alt$='knife']:nth-child(3)").style.transform = "rotate(180deg)";
+              document.querySelector("header div:last-child img[alt$='knife']:nth-child(1)").style.transform = "rotate(180deg)";
+              document.querySelector("header div:last-child img[alt$='knife']:nth-child(2)").style.transform = "rotate(-90deg)";
+              document.querySelector("header div:last-child img[alt$='knife']:nth-child(3)").style.transform = "rotate(180deg)";
+          }, 5000);
+      }
+      document.onload = spinCutlery();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,159 @@
+[
+
+    {
+        "id": 1,
+        "restaurantName": "PP Pizza",
+        "address": "Flavio A. Paniagua 8Zona Centro 29200 San Cristobal de las Casas, Chis.Mexico",
+        "lat": 16.73900715201888, 
+        "long": -92.63599564582299,
+        "ratings": [
+            {
+                "stars": 5,
+                "comment": "Wow! Best Pizza I have had since I travelled to Italy."
+            },
+            {
+                "stars": 3,
+                "comment": "The pizza was ok, but the crust was so thin, resulting in excessive grease."
+            }
+        ]
+    },
+
+    {
+        "id": 2,
+        "restaurantName": "Tacos y Cocteles el Bony",
+        "address": "Nicolas Ruiz 82-A, Barrio de Guadalupe, 29230 San Cristobal de las Casas, Chis., Mexico",
+        "lat": 16.738819628186967, 
+        "long": -92.6304752205728,
+        "ratings": [
+            {
+                "stars": 5,
+                "comment": "Best tacos in Chiapas.  And the staff were so considerate of our complete lack of Spanish."
+            },
+            {
+                "stars": 2,
+                "comment": "Yikes! We were given uncooked meat.  My daughter was sick for three days.  At least when we went back to complain they gave us a refund, otherwise just one star. Be careful if you eat here."
+            },
+            {
+                "stars": 4,
+                "comment": "Overall I would recommend this place.  Allot of tourists here though gave this place an inauthentic vibe, but regardless the tacos were great."
+            }
+        ]
+    },
+
+    {
+        "id": 3,
+        "restaurantName": "Tierra y Cielo Restaurante",
+        "address": "Benito Juárez 1, Zona Centro, 29200 San Cristobal de las Casas, Chis., Mexico",
+        "lat": 16.73654023459991, 
+        "long": -92.63572394511158,
+        "ratings": [
+            {
+                "stars": 3,
+                "comment": "The pollo con mole we had was sickeningly sweet, but the service was great.  Everyone seemed so happy and helpful. Would go back but not to order mole."
+            },
+            {
+                "stars": 5,
+                "comment": "With so many great options in San Cristobal for food this one is surely the best.  Good price, great service, and tasty food with a healthy portion."
+            }
+        ]
+    },
+
+    {
+        "id": 4,
+        "restaurantName": "Pachamama",
+        "address": "29230, Real de Guadalupe 61, Barrio de Guadalupe, San Cristobal de las Casas, Chis., Mexico",
+        "lat": 16.73768951424171, 
+        "long": -92.63306652057283,
+        "ratings": [
+            {
+                "stars": 5,
+                "comment":  "Great pizza with a unique Mexican spin.  I plan on going back here frequently during my time in Chiapas."
+            },
+            {
+                "stars": 4,
+                "comment": "The pizza was super tasty with so many obviously fresh ingredients.  It was nice to sit out on the street and people watch. Unfortunately, the service was a little slow."
+            }
+        ]
+    },
+
+    {
+        "id": 5,
+        "restaurantName": "Cafe Bar 500 Noches San Cristobal",
+        "address": "Miguel Hidalgo 6D, Zona Centro, 29200 San Cristobal de las Casas, Chis., Mexico",
+        "lat": 16.73560745290139, 
+        "long": -92.63816035243518, 
+        "ratings": [
+            {
+                "stars": 1,
+                "comment": "I asked for milk and sugar with my coffee, and recieved neither.  The coffee took twenty minutes, and then they tried to charge me for the milk and sugar.  Go somewhere else."
+            },
+            {
+                "stars": 5,
+                "comment": "They had great draft beer, something of a rarity in Mexico.  I intend on bringing my friends back tonight for a good pre-drink before hitting up the clubs."
+            },
+            {
+                "stars": 2,
+                "comment": "The servie was poor, and everything was overpiced compared to other places.  I should have gone for coffee elsewhere."
+            },
+            {
+                "stars": 5,
+                "comment": "The atmosphere was great.  Great live music all day long.  Also a great place to get some work done as they have great wifi!"
+            }
+        ]
+    },
+
+    {
+        "id": 6,
+        "restaurantName": "El Secreto",
+        "address": "16 de Septiembre 24, Zona Centro, 29240 San Cristobal de las Casas, Chis., Mexico",
+        "lat": 16.739137731248704, 
+        "long": -92.63880413208176,
+        "ratings": [
+            {
+                "stars": 4,
+                "comment": "Best coffee in town.  The coffee is free trade and local to the area. The coffee shop is a little out of the way to access, but once you there you will enjoy the coffee."
+            },
+            {
+                "stars": 5,
+                "comment": "Great vibe in this coffee shop.  Nice music and decour with coffee to suit the mood perfectly."
+            }
+        ]
+    },
+
+    {
+        "id": 7,
+        "restaurantName": "Psy Burgers",
+        "address": "Flavio A. Paniagua 49b, Barrio de Guadalupe, 29230 San Cristobal de las Casas, Chis., Mexico",
+        "lat": 16.73929413123093, 
+        "long": -92.63118399112501,
+        "ratings": [
+            {
+                "stars": 3,
+                "comment": "The burgers are too expensive for the portion size.  I felt like I could have had a second portion.  But the burger itself is tasty."
+            },
+            {
+                "stars": 5,
+                "comment": "I had a greek salad. The cheese was local cheese instead of greek cheese, and the local cheese was even better in the salad then greek cheese. And I'm someone from Greece saying this."
+            },
+            {
+                "stars": 1,
+                "comment": "Terrible service. Terrible burger. Terrible place. DO NOT GO HERE!!!"
+            }
+        ]
+    },
+
+    {   
+        "id": 8,
+        "restaurantName": "Frontera Artisan Food and Coffee",
+        "address": "Belisario Domínguez 35, Barrio del Cerrillo, 29220 San Cristobal de las Casas, Chis., Mexico",
+        "lat": 16.740373173291605, 
+        "long": -92.63544533222938,
+        "ratings": [
+            {
+                "stars": 5,
+                "comment": "This place is great for those needing some time on a computer.  The prices are reasonable, the wifi good, and there are many places to sit with power outlets. Also, the lighting is great."
+            }
+        ]
+    }
+
+]
