@@ -22,7 +22,6 @@ const RestaurantList = () => {
             const combinedRestaurantArrays = (googlePlacesRestaurants) => {
                 const refinedGoogleRestaurants = googlePlacesRestaurants.map( (restaurant, index) =>
                     {            
-                        console.log(googlePlacesRestaurants[3]);
                         return (
                             {
                                 place_id: restaurant.place_id,
@@ -72,18 +71,23 @@ const RestaurantList = () => {
                         const key = `&key=AIzaSyBdSWlQIWlDeN2S1glNMA4zYYRQEWA1qyg`;
                         const restaurantSearchUrl = url + location + radius + type + key;
                         axios.get("https://secret-ocean-49799.herokuapp.com/" + restaurantSearchUrl)
-                        .then(response => {                                    
-                            const restArray = response.data.results.map(restaurant => {
+                        .then(response => {   
+                            const arrayRest = [];                              
+                            response.data.results.forEach( restaurant => {
                                 const url = `https://maps.googleapis.com/maps/api/place/details/json?`;
                                 const place_id = `place_id=${restaurant.place_id}`;
                                 const fields = `&fields=name,place_id,photo,address_component,geometry,review`;
                                 const key = `&key=AIzaSyBdSWlQIWlDeN2S1glNMA4zYYRQEWA1qyg`
                                 const restaurantReviewsSearch = url + place_id + fields + key;
-                                return axios.get("https://cors-mbdev.herokuapp.com/" + restaurantReviewsSearch)
-                                .then(resp => resp.data.result)
+                                axios.get("https://cors-mbdev.herokuapp.com/" + restaurantReviewsSearch)
+                                .then(resp => {
+                                    arrayRest.push(resp.data.result);
+                                    if ( arrayRest.length === response.data.results.length ) {
+                                        combinedRestaurantArrays(arrayRest);
+                                    }
+                                })
                                 .catch(error => console.log(error));
                             })
-                            combinedRestaurantArrays(restArray);
                         } ).catch(error => console.log(error));
                     }, error);
                 } else {
