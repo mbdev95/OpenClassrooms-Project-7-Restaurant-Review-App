@@ -1,23 +1,35 @@
-import React from "react";
-// import PropTypes from "prop-types";
+import React, {Component} from "react";
+import PropTypes from "prop-types";
 import Filter from "./Filter.js";
 import RestaurantList from "./RestaurantList.js";
+import { render } from "@testing-library/react";
 
-const Restaurants = (props) => {
+class Restaurants extends Component {
 
-    // const {
+    state = {
+        restArray: []
+    }
 
-    // } = props
-    return (
-        <div className="review col-md-4">
-            <Filter />
-            <RestaurantList />
-        </div>
-    );
+    totalRestaurantArray = (ra) => {
+        this.setState( { restArray: ra } );
+    }
+
+    render() {
+
+        return (
+            <div className="review col-md-4">
+                <Filter filterRestaurants={this.props.filterRestaurants} totalRestaurantArray={this.state.restArray} />
+                <RestaurantList restArray={this.totalRestaurantArray} restaurants={this.props.restaurants} />
+            </div>
+        );
+
+    }
+
 }
 
-// Restaurants.propTypes = {
-
-// };
+Restaurants.propTypes = {
+    filterRestaurants: PropTypes.func,
+    restaurants: PropTypes.array
+};
 
 export default Restaurants;

@@ -1,26 +1,65 @@
-import React from "react";
+import React, {Component} from "react";
 // import PropTypes from "prop-types";
 import Map from "./Map";
 import Restaurants from "./Restaurants";
 
-const Main = () => {
+class Main extends Component {
 
-    // const {
+    state = {
+        filteredRestaurants: [],
+    }
 
-    // } = props
+    filterRestaurants = (rating, totalRestaurantArray) => {
+        this.setState( { filterActive: true } );
+        if ( rating === 1 ) {
+            const filteredRestArray = totalRestaurantArray.filter( restaurant => Math.round(restaurant.rating) === 1 );
+            this.setState( { filteredRestaurants: filteredRestArray } );
+            if ( filteredRestArray.length === 0 ) {
+                alert("There are no restaurants with the chosen rating. Please choose a different rating.")
+            }
+        }
+        if ( rating === 2 ) {
+            const filteredRestArray = totalRestaurantArray.filter( restaurant => Math.round(restaurant.rating) === 2 );
+            this.setState( { filteredRestaurants: filteredRestArray } );
+            if ( filteredRestArray.length === 0 ) {
+                alert("There are no restaurants with the chosen rating. Please choose a different rating.")
+            }
+        }
+        if ( rating === 3 ) {
+            const filteredRestArray = totalRestaurantArray.filter( restaurant => Math.round(restaurant.rating) === 3 );
+            this.setState( { filteredRestaurants: filteredRestArray } );
+            if ( filteredRestArray.length === 0 ) {
+                alert("There are no restaurants with the chosen rating. Please choose a different rating.")
+            }
+        }
+        if ( rating === 4 ) {
+            const filteredRestArray = totalRestaurantArray.filter( restaurant => Math.round(restaurant.rating) === 4 );
+            this.setState( { filteredRestaurants: filteredRestArray } );
+            if ( filteredRestArray.length === 0 ) {
+                alert("There are no restaurants with the chosen rating. Please choose a different rating.")
+            }
+        }
+        if ( rating === 5 ) {
+            const filteredRestArray = totalRestaurantArray.filter( restaurant => Math.round(restaurant.rating) === 5 );
+            this.setState( { filteredRestaurants: filteredRestArray } );
+            if ( filteredRestArray.length === 0 ) {
+                alert("There are no restaurants with the chosen rating. Please choose a different rating.")
+            }
+        }
+    }
 
-    return (
-        <div className="main">
-            <div className="row no-gutters">
-                <Map />
-                <Restaurants />
+    render() {
+
+        return (
+            <div className="main">
+                <div className="row no-gutters">
+                    <Map restaurants={this.state.filteredRestaurants} filterActive={this.state.filterActive} />
+                    <Restaurants filterRestaurants={this.filterRestaurants} restaurants={this.state.filteredRestaurants} />
+                </div>
             </div>
-        </div>
-    );
+        );
+
+    }
 }
-
-// Main.propTypes = {
-
-// }
 
 export default Main;

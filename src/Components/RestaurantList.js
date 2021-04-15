@@ -1,10 +1,16 @@
 import React from "react";
 import axios from 'axios';
+import PropTypes from "prop-types";
 import JSONRestaurants from "../restaurants.json";
 import Star from "../img/star.svg";
 
 //return all required information about each restaurant including, name, review.rating, review.text, address_component, and lat/ long all as a part of one api query, all the information can then go into an array which is then access to be the value of the various components of eachr estaurants listing.
-const RestaurantList = () => {
+const RestaurantList = (props) => {
+
+    const {
+        restArray,
+        restaurants
+    } = props
 
     const reviewYellowStars = (numberStars, starPosition) => {
         if ( starPosition <= numberStars ) {
@@ -20,28 +26,30 @@ const RestaurantList = () => {
 
         {
             const combinedRestaurantArrays = (googlePlacesRestaurants) => {
+                const removeAccents = require("diacritic");
                 const refinedGoogleRestaurants = googlePlacesRestaurants.map( (restaurant, index) =>
-                    {            
-                        return (
+                    {  
+                        let finalAddComp = ""; 
+                        if ( restaurant.address_components.length === 7 ) {
+                            finalAddComp = `, ${restaurant.address_components[6].long_name}`;
+                        } 
+                        return (  
                             {
                                 place_id: restaurant.place_id,
                                 id: index + 9,
-                                restaurantName: restaurant.name,
-                                address: restaurant.vicinity + " Chiapas, Mexico",
+                                restaurantName: removeAccents.clean(restaurant.name),
+                                address: `${restaurant.address_components[0].long_name} ${restaurant.address_components[1].long_name}, ${restaurant.address_components[2].long_name}, ${restaurant.address_components[3].long_name}, ${restaurant.address_components[4].long_name}, ${restaurant.address_components[5].long_name}${finalAddComp}`,
                                 lat: restaurant.geometry.location.lat,
                                 long: restaurant.geometry.location.lng,
-                                ratings: [
-                                    {
-                                        stars: 0,
-                                        comment: ""
-                                    }
-                                ]
+                                rating: restaurant.rating,
+                                reviews: restaurant.reviews
                             }
                         )
                     }
                 );
                 const finalRestaurantArray = [...JSONRestaurants, ...refinedGoogleRestaurants];
                 setTotalRestaurantList(finalRestaurantArray);
+                restArray(finalRestaurantArray);
             };
 
             const handleRestaurantSearch = () => {
@@ -71,14 +79,15 @@ const RestaurantList = () => {
                         const key = `&key=AIzaSyBdSWlQIWlDeN2S1glNMA4zYYRQEWA1qyg`;
                         const restaurantSearchUrl = url + location + radius + type + key;
                         axios.get("https://secret-ocean-49799.herokuapp.com/" + restaurantSearchUrl)
-                        .then(response => {   
+                        .then(response => {  
                             const arrayRest = [];                              
                             response.data.results.forEach( restaurant => {
                                 const url = `https://maps.googleapis.com/maps/api/place/details/json?`;
                                 const place_id = `place_id=${restaurant.place_id}`;
-                                const fields = `&fields=name,place_id,photo,address_component,geometry,review`;
+                                const fields = `&fields=name,place_id,photo,address_component,geometry,rating,review`;
+                                const language =`&language=en`;
                                 const key = `&key=AIzaSyBdSWlQIWlDeN2S1glNMA4zYYRQEWA1qyg`
-                                const restaurantReviewsSearch = url + place_id + fields + key;
+                                const restaurantReviewsSearch = url + place_id + fields + language + key;
                                 axios.get("https://cors-mbdev.herokuapp.com/" + restaurantReviewsSearch)
                                 .then(resp => {
                                     arrayRest.push(resp.data.result);
@@ -95,32 +104,41 @@ const RestaurantList = () => {
                 }                
             }
             handleRestaurantSearch();
-        }, []
+        }, [restArray]
 
     );
+
+    const filteredRestaurantsArray = () => {
+        if ( restaurants.length > 0 ) {
+            return restaurants;
+        } else {
+            return totalRestaurantList;
+        }
+    }
+
 
     return (
         <div className="reviewList">
             <h2>Restaurants</h2>
             <ul className="list-group">
-                { totalRestaurantList.map((restaurant, index) => {
+                { filteredRestaurantsArray().map((restaurant, index) => {
                         return (
-                            // ref={listItem} should be placed in the list to reference the list item so that item can appear when the restaurant corresponding to the list item is clicked on the map.
                             <li className="list-group-item" key={restaurant.id}>
-                                <h3 key={restaurant.id * (index + 1) + 1} >{restaurant.restaurantName}</h3>
-                                <p key={restaurant.id * (index + 1) + 2} >{restaurant.address}</p>
+                                <span key={restaurant.id * (index + 1) + 1} className="name">{restaurant.restaurantName}</span>
+                                <p><span key={restaurant.id * (index + 1) + 2} className="address" >{restaurant.address}</span></p>
                                 <h5 key={restaurant.id * (index + 1) + 3}>Reviews</h5>
-                                { restaurant.ratings.map((rating, i ) => {
+                                { restaurant.reviews.map((review, i ) => {
+                                        const removeAccents = require("diacritic");
                                         return (
                                             <div key={restaurant.id * (index + 1) + 4 + i}>
                                                 <p>Rating<span>&#x3a;</span>
-                                                    <img src={Star} alt="star" className={ reviewYellowStars(rating.stars, 1) } />
-                                                    <img src={Star} alt="star" className={ reviewYellowStars(rating.stars, 2) } />
-                                                    <img src={Star} alt="star" className={ reviewYellowStars(rating.stars, 3) } />
-                                                    <img src={Star} alt="star" className={ reviewYellowStars(rating.stars, 4) } />
-                                                    <img src={Star} alt="star" className={ reviewYellowStars(rating.stars, 5) } />
+                                                    <img src={Star} alt="star" className={ reviewYellowStars(review.rating, 1) } />
+                                                    <img src={Star} alt="star" className={ reviewYellowStars(review.rating, 2) } />
+                                                    <img src={Star} alt="star" className={ reviewYellowStars(review.rating, 3) } />
+                                                    <img src={Star} alt="star" className={ reviewYellowStars(review.rating, 4) } />
+                                                    <img src={Star} alt="star" className={ reviewYellowStars(review.rating, 5) } />
                                                 </p>
-                                                <p>Comment<span>&#x3a;</span> {rating.comment}</p>
+                                                <p>Comment<span className="lead comment">&#x3a; {removeAccents.clean(review.text)}</span></p>
                                             </div>
                                         )
                                     }
@@ -132,6 +150,11 @@ const RestaurantList = () => {
             </ul>
         </div>
     );
+}
+
+RestaurantList.propTypes = {
+    restArray: PropTypes.func,
+    restaurants: PropTypes.array
 }
 
 export default RestaurantList;

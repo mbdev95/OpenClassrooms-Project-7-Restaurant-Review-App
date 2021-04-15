@@ -1,9 +1,16 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {GoogleMap, Marker, useJsApiLoader, LoadScript, InfoWindow} from '@react-google-maps/api';
 import axios from 'axios';
 import JSONRestaurants from "../restaurants.json"
  
-const Map = () => {
+const Map = (props) => {
+
+    const {
+        restaurants,
+        filterActive
+    } = props
+
     const { isLoaded } = useJsApiLoader({
        id: 'restaurant-locator-308917',
        googleMapsApiKey: "AIzaSyBdSWlQIWlDeN2S1glNMA4zYYRQEWA1qyg"
@@ -50,7 +57,6 @@ const Map = () => {
                     { 
                         return (
                             {
-                                id: restaurant.id,
                                 lat: restaurant.geometry.location.lat,
                                 long: restaurant.geometry.location.lng,
                             }
@@ -104,6 +110,25 @@ const Map = () => {
         }, []
 
     );
+
+    const filteredRestaurantsArray = () => {
+        if ( restaurants.length > 0 ) {
+            const refinedGoogleRestaurants = restaurants.map( (restaurant) =>
+                { 
+                    return (
+                        {
+                            lat: restaurant.lat,
+                            long: restaurant.long,
+                        }
+                    )
+                }
+            );
+            return refinedGoogleRestaurants
+        } else {
+            return totalRestaurantList;
+        }
+    }
+
   
     const [map, setMap] = React.useState(null)
   
@@ -128,7 +153,7 @@ const Map = () => {
         >
         <Marker position={position} />
         {
-            totalRestaurantList.map((restaurant, index) => {
+            filteredRestaurantsArray().map((restaurant, index) => {
                 return (
                     <Marker 
                         position={ 
@@ -155,5 +180,10 @@ const Map = () => {
         </div>
     ): <></>
 }
+
+Map.propTypes = {
+    restaurants: PropTypes.array,
+    filterActive: PropTypes.bool
+};
 
 export default React.memo(Map);

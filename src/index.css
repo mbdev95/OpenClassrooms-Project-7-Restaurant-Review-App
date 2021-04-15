@@ -116,7 +116,7 @@ div .alert {
     filter: none;
 }
 
-/* Review /list */
+/* Review list */
 .reviewList {
     background: rgba(168, 168, 168, 0.9);
     height: 400px;
@@ -141,6 +141,20 @@ div .alert {
 .list-group-item {
     border: solid black 1px;
     background:rgba(107, 159, 255, 0.5);
+}
+
+.list-group-item .name {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 1.65em;
+}
+
+.list-group-item .address {
+    font-weight: 600;
+}
+
+.list-group-item .comment {
+    font-size: 1rem;
 }
 
 .filter img, .list-group-item div p img {
