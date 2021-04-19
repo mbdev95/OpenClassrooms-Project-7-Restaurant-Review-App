@@ -2,13 +2,14 @@ import React from "react";
 import PropTypes from "prop-types";
 import {GoogleMap, Marker, useJsApiLoader, LoadScript, InfoWindow} from '@react-google-maps/api';
 import axios from 'axios';
-import JSONRestaurants from "../restaurants.json"
+import JSONRestaurants from "../restaurants.json";
+import star from "../img/star.svg";
  
 const Map = (props) => {
 
     const {
         restaurants,
-        filterActive
+        showAllRestaurants
     } = props
 
     const { isLoaded } = useJsApiLoader({
@@ -53,12 +54,19 @@ const Map = (props) => {
 
         {
             const combinedRestaurantArrays = (googlePlacesRestaurants) => {
-                const refinedGoogleRestaurants = googlePlacesRestaurants.map( (restaurant) =>
-                    { 
+                const refinedGoogleRestaurants = googlePlacesRestaurants.map( (restaurant) => {
+                        let finalAddComp = ""; 
+                        if ( restaurant.address_components.length === 7 ) {
+                            finalAddComp = `, ${restaurant.address_components[6].long_name}`;
+                        }  
                         return (
                             {
+                                name: restaurant.name,
+                                address: `${restaurant.address_components[0].long_name} ${restaurant.address_components[1].long_name}, ${restaurant.address_components[2].long_name}, ${restaurant.address_components[3].long_name}, ${restaurant.address_components[4].long_name}, ${restaurant.address_components[5].long_name}${finalAddComp}`,
                                 lat: restaurant.geometry.location.lat,
                                 long: restaurant.geometry.location.lng,
+                                rating: restaurant.rating,
+                                reviews: restaurant.reviews
                             }
                         )
                     }
@@ -94,14 +102,29 @@ const Map = (props) => {
                         const key = `&key=AIzaSyBdSWlQIWlDeN2S1glNMA4zYYRQEWA1qyg`;
                         const restaurantSearchUrl = url + location + radius + type + key;
                         axios.get("https://secret-ocean-49799.herokuapp.com/" + restaurantSearchUrl)
-                            .then(response => {
-                                    combinedRestaurantArrays(response.data.results);
-                                }
-                            ).catch(error => console.log(error));
+                        .then(response => {  
+                            const arrayRest = [];                              
+                            response.data.results.forEach( restaurant => {
+                                const url = `https://maps.googleapis.com/maps/api/place/details/json?`;
+                                const place_id = `place_id=${restaurant.place_id}`;
+                                const fields = `&fields=name,address_component,geometry,rating,reviews`;
+                                const language =`&language=en`;
+                                const key = `&key=AIzaSyBdSWlQIWlDeN2S1glNMA4zYYRQEWA1qyg`;
+                                const restaurantReviewsSearch = url + place_id + fields + language + key;
+                                axios.get("https://cors-mbdev.herokuapp.com/" + restaurantReviewsSearch)
+                                .then(resp => {
+                                    arrayRest.push(resp.data.result);
+                                    if ( arrayRest.length === response.data.results.length ) {
+                                        combinedRestaurantArrays(arrayRest);
+                                    }
+                                })
+                                .catch(error => console.log(error));
+                            })
+                        } ).catch(error => console.log(error));
                     }, error);
                 } else {
                     alert("Your browser currently does not support geolocation.  Please use a different browser.");
-                }
+                } 
                 
             }
 
@@ -112,7 +135,7 @@ const Map = (props) => {
     );
 
     const filteredRestaurantsArray = () => {
-        if ( restaurants.length > 0 ) {
+        if ( restaurants.length > 0 && showAllRestaurants === false ) {
             const refinedGoogleRestaurants = restaurants.map( (restaurant) =>
                 { 
                     return (
@@ -124,11 +147,12 @@ const Map = (props) => {
                 }
             );
             return refinedGoogleRestaurants
-        } else {
+        } else if ( restaurants.length === 0 && showAllRestaurants === false ) {
+            return [];
+        } else if ( showAllRestaurants === true ) {
             return totalRestaurantList;
         }
     }
-
   
     const [map, setMap] = React.useState(null)
   
@@ -141,7 +165,28 @@ const Map = (props) => {
     const onUnmount = React.useCallback(function callback(map) {
        setMap(null)
     }, [])
-  
+
+    const [displayRestInfo, setDisplayRestInfo] = React.useState(null);
+    console.log(displayRestInfo);
+
+    const [displayRestPhoto, setDisplayRestPhoto] = React.useState("");
+
+    const starHighlight = (starPosition) => {
+        if ( starPosition <= Math.round(displayRestInfo.rating) ) {
+            return "yellowStar";
+        } else {
+            return "";
+        }
+    }
+
+    const reviewYellowStars = (numberStars, starPosition) => {
+        if ( starPosition <= numberStars ) {
+            return "yellowStar";
+        } else {          
+            return "";
+        }
+    }
+
     return isLoaded ? (
         <div className="col-md-8 map">
         <GoogleMap
@@ -161,6 +206,18 @@ const Map = (props) => {
                                 lat: parseFloat(restaurant.lat),
                                 lng: parseFloat(restaurant.long)
                             } 
+                        }
+
+                        onClick={ () => 
+                            {
+                                setDisplayRestInfo(restaurant);
+                                const url = `https://maps.googleapis.com/maps/api/streetview?`;
+                                const size = `size=210x180`;
+                                const location = `&location=${restaurant.address}`;
+                                const key = `&key=AIzaSyBdSWlQIWlDeN2S1glNMA4zYYRQEWA1qyg`;
+                                const restaurantImage = url + size + location + key;
+                                setDisplayRestPhoto(restaurantImage);
+                            }
                         } 
 
                         key={index}
@@ -174,7 +231,54 @@ const Map = (props) => {
                 )
             })
         }
-        { /* Child components, such as markers, info windows, etc. */ }
+        {
+            displayRestInfo && (
+                <InfoWindow
+                    onCloseClick={() => setDisplayRestInfo(null)}
+                    position= {
+                        {
+                            lat: displayRestInfo.lat,
+                            lng: displayRestInfo.long
+                        }
+                    }
+                >
+                    <div className="infoWindow">
+                        <h5><strong>{displayRestInfo.name}</strong></h5>
+                        <p>{displayRestInfo.address}</p>
+                        <img alt={displayRestInfo.name} src={displayRestPhoto} />
+                        <div>
+                            <h5>Rating<span>&#x3a;</span></h5>
+                            <img src={star} alt="star" className={ starHighlight(1) } />
+                            <img src={star} alt="star" className={ starHighlight(2) } />
+                            <img src={star} alt="star" className={ starHighlight(3) } />
+                            <img src={star} alt="star" className={ starHighlight(4) } />
+                            <img src={star} alt="star" className={ starHighlight(5) } />
+                        </div>
+                        <h5>Reviews</h5>
+                        { 
+                            displayRestInfo.reviews.map( (review, index) => 
+                                {
+                                    const removeAccents = require("diacritic");
+                                    return (
+                                        <div className="restaurantReview" key={index}>
+                                            <div>
+                                                <p><strong>Rating<span>&#x3a;</span></strong></p>
+                                                <img key={index + 1200} src={star} alt="star" className={ reviewYellowStars(review.rating, 1) } />
+                                                <img key={index + 1800} src={star} alt="star" className={ reviewYellowStars(review.rating, 2) } />
+                                                <img key={index + 2400} src={star} alt="star" className={ reviewYellowStars(review.rating, 3) } />
+                                                <img key={index + 3000} src={star} alt="star" className={ reviewYellowStars(review.rating, 4) } />
+                                                <img key={index + 3600} src={star} alt="star" className={ reviewYellowStars(review.rating, 5) } />                                           
+                                            </div>
+                                            <p><strong>Comment<span>&#x3a;</span></strong><span className="comment"> {removeAccents.clean(review.text)}</span></p>
+                                        </div>
+                                    );
+                                }
+                            ) 
+                        }
+                    </div>
+                </InfoWindow>
+            )
+        }
         <></>
         </GoogleMap>
         </div>
@@ -183,7 +287,7 @@ const Map = (props) => {
 
 Map.propTypes = {
     restaurants: PropTypes.array,
-    filterActive: PropTypes.bool
+    showAllRestaurants: PropTypes.bool
 };
 
 export default React.memo(Map);

@@ -7,16 +7,17 @@ class Main extends Component {
 
     state = {
         filteredRestaurants: [],
+        showAllRestaurants: true
     }
 
-    filterRestaurants = (rating, totalRestaurantArray) => {
-        this.setState( { filterActive: true } );
+    filterRestaurants = (rating, totalRestaurantArray, bool) => {
+        this.setState( { showAllRestaurants: bool } );
         if ( rating === 1 ) {
             const filteredRestArray = totalRestaurantArray.filter( restaurant => Math.round(restaurant.rating) === 1 );
             this.setState( { filteredRestaurants: filteredRestArray } );
             if ( filteredRestArray.length === 0 ) {
-                alert("There are no restaurants with the chosen rating. Please choose a different rating.")
-            }
+                alert("There are no restaurants with the chosen rating. Please choose a different rating.");
+            } 
         }
         if ( rating === 2 ) {
             const filteredRestArray = totalRestaurantArray.filter( restaurant => Math.round(restaurant.rating) === 2 );
@@ -53,8 +54,8 @@ class Main extends Component {
         return (
             <div className="main">
                 <div className="row no-gutters">
-                    <Map restaurants={this.state.filteredRestaurants} filterActive={this.state.filterActive} />
-                    <Restaurants filterRestaurants={this.filterRestaurants} restaurants={this.state.filteredRestaurants} />
+                    <Map restaurants={this.state.filteredRestaurants} showAllRestaurants={this.state.showAllRestaurants} />
+                    <Restaurants filterRestaurants={this.filterRestaurants} restaurants={this.state.filteredRestaurants} showAllRestaurants={this.state.showAllRestaurants} />
                 </div>
             </div>
         );

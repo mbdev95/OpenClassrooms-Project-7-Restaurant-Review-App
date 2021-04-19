@@ -2,7 +2,7 @@
 
     {
         "id": 1,
-        "restaurantName": "PP Pizza",
+        "name": "PP Pizza",
         "address": "Flavio A. Paniagua 8, Zona Centro, San Cristobal de las Casas, Chiapas, Mexico, 29200",
         "lat": 16.73900715201888, 
         "long": -92.63599564582299,
@@ -21,7 +21,7 @@
 
     {
         "id": 2,
-        "restaurantName": "Tacos y Cocteles el Bony",
+        "name": "Tacos y Cocteles el Bony",
         "address": "Nicolas Ruiz 82-A, Barrio de Guadalupe, San Cristobal de las Casas, Chiapas, Mexico, 29230",
         "lat": 16.738819628186967, 
         "long": -92.6304752205728,
@@ -44,7 +44,7 @@
 
     {
         "id": 3,
-        "restaurantName": "Tierra y Cielo Restaurante",
+        "name": "Tierra y Cielo Restaurante",
         "address": "Benito Juárez 1, Zona Centro, San Cristobal de las Casas, Chiapas, Mexico, 29200",
         "lat": 16.73654023459991, 
         "long": -92.63572394511158,
@@ -63,7 +63,7 @@
 
     {
         "id": 4,
-        "restaurantName": "Pachamama",
+        "name": "Pachamama",
         "address": "Real de Guadalupe 61, Barrio de Guadalupe, San Cristobal de las Casas, Chiapas, Mexico, 29230",
         "lat": 16.73768951424171, 
         "long": -92.63306652057283,
@@ -82,7 +82,7 @@
 
     {
         "id": 5,
-        "restaurantName": "Cafe Bar 500 Noches San Cristobal",
+        "name": "Cafe Bar 500 Noches San Cristobal",
         "address": "Miguel Hidalgo 6D, Zona Centro, San Cristobal de las Casas, Chiapas, Mexico, 29200",
         "lat": 16.73560745290139, 
         "long": -92.63816035243518, 
@@ -109,7 +109,7 @@
 
     {
         "id": 6,
-        "restaurantName": "El Secreto",
+        "name": "El Secreto",
         "address": "16 de Septiembre 24, Zona Centro, San Cristobal de las Casas, Chiapas, Mexico, 29240",
         "lat": 16.739137731248704, 
         "long": -92.63880413208176,
@@ -128,7 +128,7 @@
 
     {
         "id": 7,
-        "restaurantName": "Psy Burgers",
+        "name": "Psy Burgers",
         "address": "Flavio A. Paniagua 49b, Barrio de Guadalupe, San Cristobal de las Casas, Chiapas, Mexico, 29230",
         "lat": 16.73929413123093, 
         "long": -92.63118399112501,
@@ -151,7 +151,7 @@
 
     {   
         "id": 8,
-        "restaurantName": "Frontera Artisan Food and Coffee",
+        "name": "Frontera Artisan Food and Coffee",
         "address": "Belisario Domínguez 35, Barrio del Cerrillo, San Cristobal de las Casas, Chiapas, Mexico, 29220",
         "lat": 16.740373173291605, 
         "long": -92.63544533222938,

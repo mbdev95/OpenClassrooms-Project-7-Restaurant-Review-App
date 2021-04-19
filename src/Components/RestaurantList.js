@@ -9,13 +9,14 @@ const RestaurantList = (props) => {
 
     const {
         restArray,
-        restaurants
+        restaurants,
+        showAllRestaurants
     } = props
 
     const reviewYellowStars = (numberStars, starPosition) => {
         if ( starPosition <= numberStars ) {
             return "yellowStar";
-        } else {
+        } else {          
             return "";
         }
     }
@@ -37,7 +38,7 @@ const RestaurantList = (props) => {
                             {
                                 place_id: restaurant.place_id,
                                 id: index + 9,
-                                restaurantName: removeAccents.clean(restaurant.name),
+                                name: removeAccents.clean(restaurant.name),
                                 address: `${restaurant.address_components[0].long_name} ${restaurant.address_components[1].long_name}, ${restaurant.address_components[2].long_name}, ${restaurant.address_components[3].long_name}, ${restaurant.address_components[4].long_name}, ${restaurant.address_components[5].long_name}${finalAddComp}`,
                                 lat: restaurant.geometry.location.lat,
                                 long: restaurant.geometry.location.lng,
@@ -84,7 +85,7 @@ const RestaurantList = (props) => {
                             response.data.results.forEach( restaurant => {
                                 const url = `https://maps.googleapis.com/maps/api/place/details/json?`;
                                 const place_id = `place_id=${restaurant.place_id}`;
-                                const fields = `&fields=name,place_id,photo,address_component,geometry,rating,review`;
+                                const fields = `&fields=name,place_id,address_component,geometry,rating,review`;
                                 const language =`&language=en`;
                                 const key = `&key=AIzaSyBdSWlQIWlDeN2S1glNMA4zYYRQEWA1qyg`
                                 const restaurantReviewsSearch = url + place_id + fields + language + key;
@@ -109,9 +110,11 @@ const RestaurantList = (props) => {
     );
 
     const filteredRestaurantsArray = () => {
-        if ( restaurants.length > 0 ) {
+        if ( restaurants.length > 0 && showAllRestaurants === false ) {
             return restaurants;
-        } else {
+        } else if ( restaurants.length === 0 && showAllRestaurants === false ) {
+            return [];
+        } else if ( showAllRestaurants === true ) {
             return totalRestaurantList;
         }
     }
@@ -124,13 +127,21 @@ const RestaurantList = (props) => {
                 { filteredRestaurantsArray().map((restaurant, index) => {
                         return (
                             <li className="list-group-item" key={restaurant.id}>
-                                <span key={restaurant.id * (index + 1) + 1} className="name">{restaurant.restaurantName}</span>
+                                <span key={restaurant.id * (index + 1) + 1} className="name">{restaurant.name}</span>
                                 <p><span key={restaurant.id * (index + 1) + 2} className="address" >{restaurant.address}</span></p>
-                                <h5 key={restaurant.id * (index + 1) + 3}>Reviews</h5>
+                                <div>
+                                    <h4>Overall Rating<span>&#x3a;</span></h4>
+                                    <img src={Star} alt="star" className={ reviewYellowStars(Math.round(restaurant.rating), 1) } />
+                                    <img src={Star} alt="star" className={ reviewYellowStars(Math.round(restaurant.rating), 2) } />
+                                    <img src={Star} alt="star" className={ reviewYellowStars(Math.round(restaurant.rating), 3) } />
+                                    <img src={Star} alt="star" className={ reviewYellowStars(Math.round(restaurant.rating), 4) } />
+                                    <img src={Star} alt="star" className={ reviewYellowStars(Math.round(restaurant.rating), 5) } />
+                                </div>
+                                <h4 key={restaurant.id * (index + 1) + 3}>Reviews</h4>
                                 { restaurant.reviews.map((review, i ) => {
                                         const removeAccents = require("diacritic");
                                         return (
-                                            <div key={restaurant.id * (index + 1) + 4 + i}>
+                                            <div key={restaurant.id * (index + 1) + 4 + i} className="restaurantReview">
                                                 <p>Rating<span>&#x3a;</span>
                                                     <img src={Star} alt="star" className={ reviewYellowStars(review.rating, 1) } />
                                                     <img src={Star} alt="star" className={ reviewYellowStars(review.rating, 2) } />
@@ -154,7 +165,8 @@ const RestaurantList = (props) => {
 
 RestaurantList.propTypes = {
     restArray: PropTypes.func,
-    restaurants: PropTypes.array
+    restaurants: PropTypes.array,
+    showAllRestaurants: PropTypes.bool
 }
 
 export default RestaurantList;
