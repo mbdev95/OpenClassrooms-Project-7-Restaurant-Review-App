@@ -7,7 +7,8 @@ class Main extends Component {
 
     state = {
         filteredRestaurants: [],
-        showAllRestaurants: true
+        showAllRestaurants: true,
+        addedRestaurantInfo: null
     }
 
     filterRestaurants = (rating, totalRestaurantArray, bool) => {
@@ -49,13 +50,16 @@ class Main extends Component {
         }
     }
 
-    render() {
+    addedRestInfo = (addRestInfo) => {
+        this.setState( { addedRestaurantInfo: addRestInfo } );
+    }
 
+    render() {
         return (
             <div className="main">
                 <div className="row no-gutters">
-                    <Map restaurants={this.state.filteredRestaurants} showAllRestaurants={this.state.showAllRestaurants} />
-                    <Restaurants filterRestaurants={this.filterRestaurants} restaurants={this.state.filteredRestaurants} showAllRestaurants={this.state.showAllRestaurants} />
+                    <Map restaurants={this.state.filteredRestaurants} showAllRestaurants={this.state.showAllRestaurants} addedRestInfo={this.addedRestInfo} />
+                    <Restaurants filterRestaurants={this.filterRestaurants} restaurants={this.state.filteredRestaurants} showAllRestaurants={this.state.showAllRestaurants} addedRestInfo={this.state.addedRestaurantInfo} />
                 </div>
             </div>
         );

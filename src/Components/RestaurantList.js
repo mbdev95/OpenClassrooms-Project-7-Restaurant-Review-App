@@ -10,7 +10,8 @@ const RestaurantList = (props) => {
     const {
         restArray,
         restaurants,
-        showAllRestaurants
+        showAllRestaurants,
+        addedRestInfo
     } = props
 
     const reviewYellowStars = (numberStars, starPosition) => {
@@ -23,33 +24,51 @@ const RestaurantList = (props) => {
 
     const [totalRestaurantList, setTotalRestaurantList] = React.useState([]);
 
+    const [totalRestaurantListBool, setTotalRestaurantListBool] = React.useState(false);
+
     React.useEffect( () => 
 
         {
             const combinedRestaurantArrays = (googlePlacesRestaurants) => {
                 const removeAccents = require("diacritic");
                 const refinedGoogleRestaurants = googlePlacesRestaurants.map( (restaurant, index) =>
-                    {  
+                    {   
                         let finalAddComp = ""; 
-                        if ( restaurant.address_components.length === 7 ) {
-                            finalAddComp = `, ${restaurant.address_components[6].long_name}`;
-                        } 
+                        if ( restaurant.address_components.length === 6 ) {
+                            finalAddComp = `, ${restaurant.address_components[5].long_name}`;
+                        } else if ( restaurant.address_components.length === 7 ) {
+                            finalAddComp = `, ${restaurant.address_components[5].long_name}, ${restaurant.address_components[6].long_name}`;
+                        } else if ( restaurant.address_components.length === 8 ) {
+                            finalAddComp = `, ${restaurant.address_components[5].long_name}, ${restaurant.address_components[6].long_name}, ${restaurant.address_components[7].long_name}`;
+                        } else if ( restaurant.address_components.length === 9 ) {
+                            finalAddComp = `, ${restaurant.address_components[5].long_name}, ${restaurant.address_components[6].long_name}, ${restaurant.address_components[7].long_name}, ${restaurant.address_components[8].long_name}`;
+                        } else {
+                            finalAddComp = ``;
+                        }
+                        let restaurantRating = 0;
+                        if ( restaurant.rating !== undefined ) {
+                            restaurantRating = restaurant.rating;
+                        }
+                        let restaurantReviews = [];
+                        if ( restaurant.reviews !== undefined ) {
+                            restaurantReviews = restaurant.reviews;
+                        }
                         return (  
                             {
                                 place_id: restaurant.place_id,
                                 id: index + 9,
                                 name: removeAccents.clean(restaurant.name),
-                                address: `${restaurant.address_components[0].long_name} ${restaurant.address_components[1].long_name}, ${restaurant.address_components[2].long_name}, ${restaurant.address_components[3].long_name}, ${restaurant.address_components[4].long_name}, ${restaurant.address_components[5].long_name}${finalAddComp}`,
-                                lat: restaurant.geometry.location.lat,
+                                address: `${restaurant.address_components[0].long_name.replace("#", "")} ${restaurant.address_components[1].long_name}, ${restaurant.address_components[2].long_name}, ${restaurant.address_components[3].long_name}, ${restaurant.address_components[4].long_name}${finalAddComp}`,                                lat: restaurant.geometry.location.lat,
                                 long: restaurant.geometry.location.lng,
-                                rating: restaurant.rating,
-                                reviews: restaurant.reviews
+                                rating: restaurantRating,
+                                reviews: restaurantReviews
                             }
                         )
                     }
                 );
                 const finalRestaurantArray = [...JSONRestaurants, ...refinedGoogleRestaurants];
                 setTotalRestaurantList(finalRestaurantArray);
+                setTotalRestaurantListBool(true);
                 restArray(finalRestaurantArray);
             };
 
@@ -110,21 +129,23 @@ const RestaurantList = (props) => {
     );
 
     const filteredRestaurantsArray = () => {
-        if ( restaurants.length > 0 && showAllRestaurants === false ) {
+        if ( restaurants.length > 0 && showAllRestaurants === false && addedRestInfo === null ) {
             return restaurants;
         } else if ( restaurants.length === 0 && showAllRestaurants === false ) {
             return [];
-        } else if ( showAllRestaurants === true ) {
+        } else if ( showAllRestaurants === true && addedRestInfo === null ) {
             return totalRestaurantList;
-        }
+        } else if ( addedRestInfo !== null ) {
+            console.log(addedRestInfo);
+        } 
     }
-
 
     return (
         <div className="reviewList">
             <h2>Restaurants</h2>
             <ul className="list-group">
-                { filteredRestaurantsArray().map((restaurant, index) => {
+                {   
+                    totalRestaurantListBool ? filteredRestaurantsArray().map((restaurant, index) => {
                         return (
                             <li className="list-group-item" key={restaurant.id}>
                                 <span key={restaurant.id * (index + 1) + 1} className="name">{restaurant.name}</span>
@@ -157,7 +178,8 @@ const RestaurantList = (props) => {
                             </li>
                         )
                     }
-                ) }
+                ) : ""
+            }
             </ul>
         </div>
     );
@@ -166,7 +188,8 @@ const RestaurantList = (props) => {
 RestaurantList.propTypes = {
     restArray: PropTypes.func,
     restaurants: PropTypes.array,
-    showAllRestaurants: PropTypes.bool
+    showAllRestaurants: PropTypes.bool,
+    addedRestInfoArray: PropTypes.object
 }
 
 export default RestaurantList;

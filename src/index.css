@@ -78,7 +78,7 @@ img[src$='knife.svg']:nth-child(2) {
     border-right: solid black 3px; 
 }
 
-/* Map Infowindow */
+/* Map Restaurant Infowindow */
 
 div[tabindex]:focus {
     outline: none;
@@ -135,6 +135,12 @@ div[tabindex]:focus {
 
 .infoWindow .restaurantReview p {
     margin-bottom: 5px;
+}
+
+/* Map Add Restaurant Infowindow */
+
+form div label strong {
+    font-size: 1.25em;
 }
 
 /* Filter Component */

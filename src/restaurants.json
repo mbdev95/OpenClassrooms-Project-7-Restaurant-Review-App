@@ -2,34 +2,34 @@
 
     {
         "id": 1,
-        "name": "PP Pizza",
-        "address": "Flavio A. Paniagua 8, Zona Centro, San Cristobal de las Casas, Chiapas, Mexico, 29200",
-        "lat": 16.73900715201888, 
-        "long": -92.63599564582299,
+        "name": "El Puchero",
+        "address": "Perif. Carlos Pellicer Cámara 614, Tulipanes, Villahermosa, Tabasco, Mexico, 86097",
+        "lat": 17.9810811226062, 
+        "long": -92.92411343655448,
         "rating": 4,
         "reviews": [
             {
                 "rating": 5,
-                "text": "Wow! Best Pizza I have had since I travelled to Italy."
+                "text": "Wow! Great local Mexican food. The things I would do for some of that mole right now."
             },
             {
                 "rating": 3,
-                "text": "The pizza was ok, but the crust was so thin, resulting in excessive grease."
+                "text": "The service was very slow and they demanded a tip.  However, the food was worth the wait."
             }
         ]
     },
 
     {
         "id": 2,
-        "name": "Tacos y Cocteles el Bony",
-        "address": "Nicolas Ruiz 82-A, Barrio de Guadalupe, San Cristobal de las Casas, Chiapas, Mexico, 29230",
-        "lat": 16.738819628186967, 
-        "long": -92.6304752205728,
+        "name": "El Teapaneco",
+        "address": "Calle Quintín Arauz Carrillo 214, Primero de Mayo, Villahermosa, Tabasco, Mexico, 86190",
+        "lat": 17.978066847059484,   
+        "long": -92.9333429176966,
         "rating": 3.7,
         "reviews": [
             {
                 "rating": 5,
-                "text": "Best tacos in Chiapas.  And the staff were so considerate of our complete lack of Spanish."
+                "text": "Best tacos in Tabasco.  And the staff were so considerate of our complete lack of Spanish."
             },
             {
                 "rating": 2,
@@ -37,55 +37,55 @@
             },
             {
                 "rating": 4,
-                "text": "Overall I would recommend this place.  Allot of tourists here though gave this place an inauthentic vibe, but regardless the tacos were great."
+                "text": "Overall I would recommend this place.  Allot of expats here though gave this place an inauthentic vibe, but regardless the tacos were great."
             }
         ]
     },
 
     {
         "id": 3,
-        "name": "Tierra y Cielo Restaurante",
-        "address": "Benito Juárez 1, Zona Centro, San Cristobal de las Casas, Chiapas, Mexico, 29200",
-        "lat": 16.73654023459991, 
-        "long": -92.63572394511158,
+        "name": "KFC",
+        "address": "Heroico Colegio Militar 103, Atasta de Serra, Villahermosa, Tabasco, Mexico, 86100",
+        "lat": 17.982106931241457,  
+        "long": -92.94113473610597,
         "rating": 4,
         "reviews": [
             {
                 "rating": 3,
-                "text": "The pollo con mole we had was sickeningly sweet, but the service was great.  Everyone seemed so happy and helpful. Would go back but not to order mole."
+                "text": "The pollo was not fully cooked in one part, but the rest was delicious.  Beware of your food not being fully cooked."
             },
             {
                 "rating": 5,
-                "text": "With so many great options in San Cristobal for food this one is surely the best.  Good price, great service, and tasty food with a healthy portion."
+                "text": "With so many great food options in Villa Hermosa, sometimes some good old KFC is the way to go.  Good price, great service, and tasty food with a healthy portion."
             }
         ]
     },
 
     {
         "id": 4,
-        "name": "Pachamama",
-        "address": "Real de Guadalupe 61, Barrio de Guadalupe, San Cristobal de las Casas, Chiapas, Mexico, 29230",
-        "lat": 16.73768951424171, 
-        "long": -92.63306652057283,
-        "rating": 4.5,
+        "name": "Fuego Extremo",
+        "address": "Calle Andrés García 219, Primero de Mayo, Villahermosa, Tabasco, Mexico, 86190",
+        "lat": 17.979883327289798,  
+        "long": -92.93456600510063,
+        "rating": 4,
         "reviews": [
             {
-                "rating": 5,
-                "text":  "Great pizza with a unique Mexican spin.  I plan on going back here frequently during my time in Chiapas."
+                "rating": 4,
+                "text":  "The burgers were overpriced but worth it given their freshness and taste."
             },
             {
                 "rating": 4,
-                "text": "The pizza was super tasty with so many obviously fresh ingredients.  It was nice to sit out on the street and people watch. Unfortunately, the service was a little slow."
+                "text": "The burger was super tasty with so many obviously fresh ingredients.  It was nice to sit out on the street and people watch. Unfortunately, the service was a little slow."
             }
         ]
     },
 
     {
         "id": 5,
-        "name": "Cafe Bar 500 Noches San Cristobal",
-        "address": "Miguel Hidalgo 6D, Zona Centro, San Cristobal de las Casas, Chiapas, Mexico, 29200",
-        "lat": 16.73560745290139, 
-        "long": -92.63816035243518, 
+        "name": "Merihnos Restaurante",
+        "address": "Calle Andrés García 239, Primero de Mayo, Villahermosa, Tabasco, Mexico, 86190",
+        "lat": 17.97917961868025,  
+        "long": -92.93483937436784, 
         "rating": 3.25,
         "reviews": [
             {
@@ -98,7 +98,7 @@
             },
             {
                 "rating": 2,
-                "text": "The servie was poor, and everything was overpiced compared to other places.  I should have gone for coffee elsewhere."
+                "text": "The service was poor, and everything was overpiced compared to other places.  I should have gone for my lunch elsewhere."
             },
             {
                 "rating": 5,
@@ -109,10 +109,10 @@
 
     {
         "id": 6,
-        "name": "El Secreto",
-        "address": "16 de Septiembre 24, Zona Centro, San Cristobal de las Casas, Chiapas, Mexico, 29240",
-        "lat": 16.739137731248704, 
-        "long": -92.63880413208176,
+        "name": "Jochos Jarochos Sandino",
+        "address": "Av. Gral. Augusto César Sandino 330, Primero de Mayo, Villahermosa, Tabasco, Mexico, 86190",
+        "lat": 17.976720212584098, 
+        "long": -92.93493593386579,
         "rating": 4.5,
         "reviews": [
             {
@@ -128,10 +128,10 @@
 
     {
         "id": 7,
-        "name": "Psy Burgers",
-        "address": "Flavio A. Paniagua 49b, Barrio de Guadalupe, San Cristobal de las Casas, Chiapas, Mexico, 29230",
-        "lat": 16.73929413123093, 
-        "long": -92.63118399112501,
+        "name": "Bar Deja Vu",
+        "address": "Calle Quintín Arauz Carrillo 105, Primero de Mayo, Villahermosa, Tabasco, Mexico, 86190",
+        "lat": 17.976958552671448,  
+        "long": -92.93073373608752,
         "rating": 3,
         "reviews": [
             {
@@ -151,15 +151,15 @@
 
     {   
         "id": 8,
-        "name": "Frontera Artisan Food and Coffee",
-        "address": "Belisario Domínguez 35, Barrio del Cerrillo, San Cristobal de las Casas, Chiapas, Mexico, 29220",
-        "lat": 16.740373173291605, 
-        "long": -92.63544533222938,
+        "name": "Plaza Jaguar",
+        "address": "Av Paseo de la Sierra 609, Reforma, Villahermosa, Tabasco, Mexico, 86090",
+        "lat": 17.978602225982513, 
+        "long": -92.9294980846543,
         "rating": 5,
         "reviews": [
             {
                 "rating": 5,
-                "text": "This place is great for those needing some time on a computer.  The prices are reasonable, the wifi good, and there are many places to sit with power outlets. Also, the lighting is great."
+                "text": "This place is great for those needing some time on a computer.  The prices are reasonable, the wifi good, and there are many places to sit with power outlets. Also, the lighting is great.  Good Pizza too."
             }
         ]
     }
