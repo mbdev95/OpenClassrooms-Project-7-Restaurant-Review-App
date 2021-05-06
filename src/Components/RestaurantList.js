@@ -147,6 +147,16 @@ const RestaurantList = (props) => {
 
     const [restaurantCurrentlyAdded, setRestaurantCurrentlyAdded] = React.useState({});
 
+    const [addedStarRating, setAddedStarRating] = React.useState(0);
+
+    const starHighlight = (rating) => {
+        if ( rating <= addedStarRating ) {
+            return "yellowStar";
+        } else {
+            return "";
+        }
+    }
+
     return (
         <div className="reviewList">
             <h2>Restaurants</h2>
@@ -187,18 +197,34 @@ const RestaurantList = (props) => {
                                     <div className="modal-dialog">
                                         <div className="modal-content">
                                             <div className="modal-header">
-                                                <h5 className="modal-title">{`Add Reviews For ${restaurantCurrentlyAdded.name}`}</h5>
+                                                <h4 className="modal-title">{`Add Reviews For ${restaurantCurrentlyAdded.name}`}</h4>
+                                                <button type="button" onClick={ () => {
+                                                    document.getElementById("addReviewModal").style.display = "none";
+                                                    document.getElementsByTagName("textarea")[0].value = "";
+                                                    document.getElementsByTagName("textarea")[0].placeholder = "Add your review here...";
+                                                } }>X</button>
                                             </div>
                                             <div className="modal-body">
                                                 <div id="reviewTextArea" >
-                                                    <p>Place the star symbol rating system here used elsewhere in the app</p>
+                                                    <div>
+                                                        <p>Rating<strong><span>&#x3a;</span></strong></p>
+                                                        <img src={Star} alt="star" className={ starHighlight(1) } onClick={ () => setAddedStarRating(1) } />
+                                                        <img src={Star} alt="star" className={ starHighlight(2) } onClick={ () => setAddedStarRating(2) } />
+                                                        <img src={Star} alt="star" className={ starHighlight(3) } onClick={ () => setAddedStarRating(3) } />
+                                                        <img src={Star} alt="star" className={ starHighlight(4) } onClick={ () => setAddedStarRating(4) } />
+                                                        <img src={Star} alt="star" className={ starHighlight(5) } onClick={ () => setAddedStarRating(5) } />
+                                                    </div>
                                                     <label htmlFor="reviewText">Review Comment<strong><span>&#x3a;</span></strong></label>
-                                                    <textarea type="text" id="reviewText" name="reviewText" rows="7" cols="40" />
+                                                    <textarea type="text" id="reviewText" name="reviewText" rows="7" placeholder="Add you review here..." onFocus={ () => document.getElementsByTagName("textarea")[0].placeholder = "" } />
                                                 </div>
                                             </div>
                                             <div className="modal-footer">
-                                                <button type="button" className="btn btn-secondary" onClick={ () => document.getElementById("addReviewModal").style.display = "none"} >Close</button>
-                                                <button type="button" className="btn btn-primary">Add Your Review</button>
+                                                <button type="button" className="btn btn-secondary" onClick={ () => {
+                                                    document.getElementById("addReviewModal").style.display = "none";
+                                                    document.getElementsByTagName("textarea")[0].value = "";
+                                                    document.getElementsByTagName("textarea")[0].placeholder = "Add your review here...";
+                                                } } >Close</button>
+                                                <button type="button" className="btn btn-primary">Add Review</button>
                                             </div>
                                         </div>
                                     </div>
@@ -207,13 +233,9 @@ const RestaurantList = (props) => {
                                 <button type="button" className="btn btn-primary btn-open" onClick={ () => {
                                         document.getElementById("addReviewModal").style.display = "block";
                                         document.getElementById("addReviewModal").style.marginTop = "100px";
-                                        document.getElementsByClassName("modal-dialog")[0].style.border = "none";
                                         document.getElementsByClassName("modal-content")[0].style.border = "2px solid black";
-                                        document.getElementsByClassName("modal-content")[0].style.backgroundColor = "#fce5d9";
                                         document.getElementsByClassName("modal-footer")[0].style.borderTop = "1px solid black";
-                                        document.getElementsByTagName("textarea")[0].style.fontFamily = "helvetica, arial, sans-serif";
-                                        document.getElementsByTagName("textarea")[0].style.paddingRight = "10px";
-                                        document.getElementsByTagName("textarea")[0].style.paddingLeft = "10px";
+                                        document.getElementsByClassName("modal-dialog")[0].style.borderBottom = "none";
                                         document.getElementById("reviewTextArea").style.borderBottom = "none";
                                         document.getElementById("reviewTextArea").style.flexDirection = "column";
                                         setRestaurantCurrentlyAdded(restaurant);

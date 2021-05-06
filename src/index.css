@@ -275,6 +275,65 @@ div .alert {
     letter-spacing: 0.05em;
 }
 
+/* Add Review Modal */
+.modal-content {
+    border: 2px solid black;
+    background-color: #fce5d9;
+    width: 95%;
+}
+
+.modal-header {
+    padding: 0px 0px 12px 0px;
+    margin: 12px 1rem 0px 1rem;
+}
+
+.modal-header h4 {
+    margin-top: 0px;
+}
+
+.modal-header button {
+    background-color: #fce5d9;
+    border: none;
+}
+
+.modal-header button:hover {
+    background-color: #ed837b;
+}
+
+.modal-body div div {
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: 4px;
+}
+
+.modal-body div div p {
+    margin-bottom: 0px;
+    height: 20px;
+    margin-top: 12px;
+}
+
+.modal-body div div img:hover {
+    filter: none;
+}
+
+.modal p, .modal label {
+    font-size: 1.35em;
+}
+
+.modal label {
+    margin-top: 10px;
+}
+
+textarea {
+    font-family: helvetica, arial, sans-serif;
+    padding: 3px 10px;
+}
+
+.modal-footer {
+    padding: 12px 0px 0px 0px;
+    margin: 0px 1rem 12px 1rem;
+}
+
 /* Footer */
 footer {
     background: rgba(235, 142, 129, 0.7);
@@ -321,6 +380,9 @@ footer img {
     }
     .main {
         margin: 0px 50px;
+    }
+    .modal-content {
+        width: 80%;
     }
     footer p {
         font-size: 1em;
