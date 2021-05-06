@@ -8,10 +8,12 @@ class Main extends Component {
     state = {
         filteredRestaurants: [],
         showAllRestaurants: true,
-        addedRestaurantInfo: null
+        addedRestaurantInfo: []
     }
 
     filterRestaurants = (rating, totalRestaurantArray, bool) => {
+        // const totalRestaurantArray = [...totalRestArray, ...this.state.addedRestaurantInfo];
+        console.log(totalRestaurantArray);
         this.setState( { showAllRestaurants: bool } );
         if ( rating === 1 ) {
             const filteredRestArray = totalRestaurantArray.filter( restaurant => Math.round(restaurant.rating) === 1 );

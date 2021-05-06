@@ -174,7 +174,7 @@ div .alert {
 }
 
 .filter button {
-    font-family: helvetica;
+    font-family: helvetica, arial, sans-serif;
     font-size: 1.2em;
     letter-spacing: 0.05em;
     width: 75%;
@@ -267,6 +267,12 @@ div .alert {
 .list-group-item div p:last-child {
     border-bottom: solid black 1px;
     padding-bottom: 3px;
+}
+
+.list-group-item button {
+    font-family: helvetica, arial, sans-serif;
+    font-size: 1.05em;
+    letter-spacing: 0.05em;
 }
 
 /* Footer */

@@ -52,7 +52,7 @@ const Map = (props) => {
     }
 
     const [totalRestaurantList, setTotalRestaurantList] = React.useState([]);
-
+    
     React.useEffect( () => 
 
         {
@@ -212,14 +212,22 @@ const Map = (props) => {
         }
     }
 
-    const [newRestaurantMarkerArray, setNewRestaurantMarkerArray] = React.useState([]);
-
-    const restaurantPosition = (mapClickEvent) => {
-        const newRestMarker = newRestaurantMarkerArray.concat(mapClickEvent);
-        setNewRestaurantMarkerArray(newRestMarker);
+    const addedRestInfoForMap = mapAddedRestInfo => {
+        const updatedMapRest = totalRestaurantList.concat(mapAddedRestInfo);
+        setTotalRestaurantList(updatedMapRest);
     }
 
     const [addRestaurantForm, setAddRestaurantForm] = React.useState(null);
+
+    const location = (restaurant) => {
+        let location;
+        restaurant.newlyAddedRest ? location = restaurant.position : 
+        location = {
+            lat: parseFloat(restaurant.lat),
+            lng: parseFloat(restaurant.long)
+        }
+        return location; 
+    } 
 
     return isLoaded ? (
         <div className="col-md-8 map">
@@ -249,28 +257,6 @@ const Map = (props) => {
                 />
 
                 {
-                    newRestaurantMarkerArray.map( ( restPosition, index ) => 
-                        { 
-                            return (
-                                <div key={index}>
-                                    <Marker               
-                                        position={restPosition} 
-
-                                        icon= {
-                                            {
-                                                url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
-                                            }
-                                        }
-
-                                        onClick={ event => setAddRestaurantForm(event.latLng) } 
-                                    />
-                                </div>
-                            );
-                        }
-                    )
-                }
-
-                {
                     addRestaurantForm && (
                         <InfoWindow
                             onCloseClick={() => setAddRestaurantForm(null)}
@@ -293,11 +279,18 @@ const Map = (props) => {
                                     if ( nameInput.value === "" || addressInput.value === "" ) {
                                         alert("Please fill in an address and name for the restaurant before adding the restaurant.");
                                     } else {
-                                        restaurantPosition(addRestaurantForm);
-                                        const addedRestaurantInfo = {
-                                            name: nameInput.value,
-                                            address: addressInput.value
-                                        };
+                                        const addedRestaurantInfo = [
+                                            {
+                                                id: totalRestaurantList.length + 1,
+                                                name: nameInput.value,
+                                                address: addressInput.value,
+                                                position: addRestaurantForm,
+                                                rating: 0,
+                                                reviews: [],
+                                                newlyAddedRest: true
+                                            }
+                                        ]
+                                        addedRestInfoForMap(addedRestaurantInfo);
                                         addedRestInfo(addedRestaurantInfo);
                                         setAddRestaurantForm(null);
                                     }
@@ -309,18 +302,13 @@ const Map = (props) => {
 
                 {
                     filteredRestaurantsArray().map((restaurant, index) => {
+
                         return (
                             <Marker 
-                                position={ 
-                                    {
-                                        lat: parseFloat(restaurant.lat),
-                                        lng: parseFloat(restaurant.long)
-                                    } 
-                                }
+                                position={ location(restaurant) }
 
                                 onClick={ () => 
                                     {
-                                        console.log(restaurant);
                                         setDisplayRestInfo(restaurant);
                                         const url = `https://maps.googleapis.com/maps/api/streetview?`;
                                         const size = `size=210x180`;
@@ -347,12 +335,7 @@ const Map = (props) => {
                     displayRestInfo && (
                         <InfoWindow
                             onCloseClick={() => setDisplayRestInfo(null)}
-                            position= {
-                                {
-                                    lat: displayRestInfo.lat,
-                                    lng: displayRestInfo.long
-                                }
-                            }
+                            position= { location(displayRestInfo) }
                         >
                             <div className="infoWindow">
                                 <h5><strong>{displayRestInfo.name}</strong></h5>

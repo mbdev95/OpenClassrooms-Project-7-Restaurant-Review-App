@@ -128,17 +128,24 @@ const RestaurantList = (props) => {
 
     );
 
+    React.useEffect( () => {
+            const totalRestPlusAddedRest = [...totalRestaurantList, ...addedRestInfo];
+            setTotalRestaurantList(totalRestPlusAddedRest);
+            restArray(totalRestPlusAddedRest);
+        }, [addedRestInfo]
+    );
+
     const filteredRestaurantsArray = () => {
-        if ( restaurants.length > 0 && showAllRestaurants === false && addedRestInfo === null ) {
+        if ( restaurants.length > 0 && showAllRestaurants === false ) {
             return restaurants;
         } else if ( restaurants.length === 0 && showAllRestaurants === false ) {
             return [];
-        } else if ( showAllRestaurants === true && addedRestInfo === null ) {
+        } else if ( showAllRestaurants === true ) {
             return totalRestaurantList;
-        } else if ( addedRestInfo !== null ) {
-            console.log(addedRestInfo);
         } 
     }
+
+    const [restaurantCurrentlyAdded, setRestaurantCurrentlyAdded] = React.useState({});
 
     return (
         <div className="reviewList">
@@ -175,11 +182,49 @@ const RestaurantList = (props) => {
                                         )
                                     }
                                 ) }
+
+                                <div className="modal" id="addReviewModal" tabIndex="-1" aria-labelledby="addReview">
+                                    <div className="modal-dialog">
+                                        <div className="modal-content">
+                                            <div className="modal-header">
+                                                <h5 className="modal-title">{`Add Reviews For ${restaurantCurrentlyAdded.name}`}</h5>
+                                            </div>
+                                            <div className="modal-body">
+                                                <div id="reviewTextArea" >
+                                                    <p>Place the star symbol rating system here used elsewhere in the app</p>
+                                                    <label htmlFor="reviewText">Review Comment<strong><span>&#x3a;</span></strong></label>
+                                                    <textarea type="text" id="reviewText" name="reviewText" rows="7" cols="40" />
+                                                </div>
+                                            </div>
+                                            <div className="modal-footer">
+                                                <button type="button" className="btn btn-secondary" onClick={ () => document.getElementById("addReviewModal").style.display = "none"} >Close</button>
+                                                <button type="button" className="btn btn-primary">Add Your Review</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button type="button" className="btn btn-primary btn-open" onClick={ () => {
+                                        document.getElementById("addReviewModal").style.display = "block";
+                                        document.getElementById("addReviewModal").style.marginTop = "100px";
+                                        document.getElementsByClassName("modal-dialog")[0].style.border = "none";
+                                        document.getElementsByClassName("modal-content")[0].style.border = "2px solid black";
+                                        document.getElementsByClassName("modal-content")[0].style.backgroundColor = "#fce5d9";
+                                        document.getElementsByClassName("modal-footer")[0].style.borderTop = "1px solid black";
+                                        document.getElementsByTagName("textarea")[0].style.fontFamily = "helvetica, arial, sans-serif";
+                                        document.getElementsByTagName("textarea")[0].style.paddingRight = "10px";
+                                        document.getElementsByTagName("textarea")[0].style.paddingLeft = "10px";
+                                        document.getElementById("reviewTextArea").style.borderBottom = "none";
+                                        document.getElementById("reviewTextArea").style.flexDirection = "column";
+                                        setRestaurantCurrentlyAdded(restaurant);
+                                    }
+                                } >Add Review</button>
+
                             </li>
                         )
                     }
                 ) : ""
-            }
+                }
             </ul>
         </div>
     );
@@ -189,7 +234,7 @@ RestaurantList.propTypes = {
     restArray: PropTypes.func,
     restaurants: PropTypes.array,
     showAllRestaurants: PropTypes.bool,
-    addedRestInfoArray: PropTypes.object
+    addedRestInfo: PropTypes.array
 }
 
 export default RestaurantList;

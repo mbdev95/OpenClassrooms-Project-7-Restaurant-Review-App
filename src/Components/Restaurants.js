@@ -31,7 +31,7 @@ Restaurants.propTypes = {
     filterRestaurants: PropTypes.func,
     restaurants: PropTypes.array,
     showAllRestaurants: PropTypes.bool,
-    addedRestInfo: PropTypes.object
+    addedRestInfo: PropTypes.array
 };
 
 export default Restaurants;
