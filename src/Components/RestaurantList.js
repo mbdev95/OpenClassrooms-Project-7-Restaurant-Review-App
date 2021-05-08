@@ -23,7 +23,7 @@ const RestaurantList = (props) => {
     }
 
     const [totalRestaurantList, setTotalRestaurantList] = React.useState([]);
-
+    
     const [totalRestaurantListBool, setTotalRestaurantListBool] = React.useState(false);
 
     React.useEffect( () => 
@@ -60,6 +60,7 @@ const RestaurantList = (props) => {
                                 name: removeAccents.clean(restaurant.name),
                                 address: `${restaurant.address_components[0].long_name.replace("#", "")} ${restaurant.address_components[1].long_name}, ${restaurant.address_components[2].long_name}, ${restaurant.address_components[3].long_name}, ${restaurant.address_components[4].long_name}${finalAddComp}`,                                lat: restaurant.geometry.location.lat,
                                 long: restaurant.geometry.location.lng,
+                                newReview: false,
                                 rating: restaurantRating,
                                 reviews: restaurantReviews
                             }
@@ -145,15 +146,27 @@ const RestaurantList = (props) => {
         } 
     }
 
-    const [restaurantCurrentlyAdded, setRestaurantCurrentlyAdded] = React.useState({});
+    const [restaurantToBeAdded, setRestaurantToBeAdded] = React.useState({});
+
+    const [restaurantCurrentlyAdded, setRestaurantCurrentlyAdded] = React.useState([]);
 
     const [addedStarRating, setAddedStarRating] = React.useState(0);
+
+    const [newReviewsToAdd, setNewReviewsToAdd] = React.useState([]);
 
     const starHighlight = (rating) => {
         if ( rating <= addedStarRating ) {
             return "yellowStar";
         } else {
             return "";
+        }
+    }
+
+    const newRestaurantReview = (restaurant) => {
+        if ( restaurant.name === restaurantCurrentlyAdded.name ) {
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -176,7 +189,7 @@ const RestaurantList = (props) => {
                                     <img src={Star} alt="star" className={ reviewYellowStars(Math.round(restaurant.rating), 5) } />
                                 </div>
                                 <h4 key={restaurant.id * (index + 1) + 3}>Reviews</h4>
-                                { restaurant.reviews.map((review, i ) => {
+                                { newRestaurantReview(restaurant) ? newReviewsToAdd.map((review, i ) => {
                                         const removeAccents = require("diacritic");
                                         return (
                                             <div key={restaurant.id * (index + 1) + 4 + i} className="restaurantReview">
@@ -191,17 +204,33 @@ const RestaurantList = (props) => {
                                             </div>
                                         )
                                     }
-                                ) }
+                                ) : restaurant.reviews.map((review, i ) => {
+                                        const removeAccents = require("diacritic");
+                                        return (
+                                            <div key={restaurant.id * (index + 1) + 4 + i} className="restaurantReview">
+                                                <p>Rating<span>&#x3a;</span>
+                                                    <img src={Star} alt="star" className={ reviewYellowStars(review.rating, 1) } />
+                                                    <img src={Star} alt="star" className={ reviewYellowStars(review.rating, 2) } />
+                                                    <img src={Star} alt="star" className={ reviewYellowStars(review.rating, 3) } />
+                                                    <img src={Star} alt="star" className={ reviewYellowStars(review.rating, 4) } />
+                                                    <img src={Star} alt="star" className={ reviewYellowStars(review.rating, 5) } />
+                                                </p>
+                                                <p>Comment<span className="lead comment">&#x3a; {removeAccents.clean(review.text)}</span></p>
+                                            </div>
+                                        )
+                                    }) 
+                                }
 
                                 <div className="modal" id="addReviewModal" tabIndex="-1" aria-labelledby="addReview">
                                     <div className="modal-dialog">
                                         <div className="modal-content">
                                             <div className="modal-header">
-                                                <h4 className="modal-title">{`Add Reviews For ${restaurantCurrentlyAdded.name}`}</h4>
+                                                <h4 className="modal-title">{`Add Reviews For ${restaurantToBeAdded.name}`}</h4>
                                                 <button type="button" onClick={ () => {
                                                     document.getElementById("addReviewModal").style.display = "none";
                                                     document.getElementsByTagName("textarea")[0].value = "";
                                                     document.getElementsByTagName("textarea")[0].placeholder = "Add your review here...";
+                                                    setAddedStarRating(0);
                                                 } }>X</button>
                                             </div>
                                             <div className="modal-body">
@@ -215,7 +244,7 @@ const RestaurantList = (props) => {
                                                         <img src={Star} alt="star" className={ starHighlight(5) } onClick={ () => setAddedStarRating(5) } />
                                                     </div>
                                                     <label htmlFor="reviewText">Review Comment<strong><span>&#x3a;</span></strong></label>
-                                                    <textarea type="text" id="reviewText" name="reviewText" rows="7" placeholder="Add you review here..." onFocus={ () => document.getElementsByTagName("textarea")[0].placeholder = "" } />
+                                                    <textarea type="text" id="reviewText" name="reviewText" rows="7" placeholder="Add you review here..." onFocus={ () => document.getElementsByTagName("textarea")[0].placeholder = "" } onBlur={ () => document.getElementsByTagName("textarea")[0].placeholder = "Add you review here..." } />
                                                 </div>
                                             </div>
                                             <div className="modal-footer">
@@ -223,8 +252,31 @@ const RestaurantList = (props) => {
                                                     document.getElementById("addReviewModal").style.display = "none";
                                                     document.getElementsByTagName("textarea")[0].value = "";
                                                     document.getElementsByTagName("textarea")[0].placeholder = "Add your review here...";
+                                                    setAddedStarRating(0);
                                                 } } >Close</button>
-                                                <button type="button" className="btn btn-primary">Add Review</button>
+                                                <button type="button" className="btn btn-primary" onClick={ () => {
+                                                    if ( addedStarRating === 0 && document.getElementsByTagName("textarea")[0].value !== "" ) {
+                                                        alert(`Please select a rating for ${restaurantToBeAdded.name} before submitting your review.`);
+                                                    } else if ( addedStarRating > 0 && document.getElementsByTagName("textarea")[0].value === "" ) {
+                                                        alert(`Please write a review for ${restaurantToBeAdded.name} before submitting your review.`);
+                                                    } else if ( addedStarRating === 0 && document.getElementsByTagName("textarea")[0].value === "" ) {
+                                                        alert(`Please give a rating and write a review for ${restaurantToBeAdded.name} before submitting your review.`);
+                                                    } else if ( addedStarRating > 0 && document.getElementsByTagName("textarea")[0].value !== "" ) {
+                                                        const newReviews = [...totalRestaurantList[restaurantToBeAdded.id - 1].reviews, ...[ 
+                                                                {
+                                                                    rating: addedStarRating,
+                                                                    text: document.getElementsByTagName("textarea")[0].value
+                                                                } 
+                                                            ]
+                                                        ]
+                                                        setRestaurantCurrentlyAdded(restaurantToBeAdded);
+                                                        setNewReviewsToAdd(newReviews);
+                                                        document.getElementById("addReviewModal").style.display = "none";
+                                                        document.getElementsByTagName("textarea")[0].value = "";
+                                                        document.getElementsByTagName("textarea")[0].placeholder = "Add your review here...";
+                                                        setAddedStarRating(0);
+                                                    }
+                                                } }>Add Review</button>
                                             </div>
                                         </div>
                                     </div>
@@ -238,7 +290,7 @@ const RestaurantList = (props) => {
                                         document.getElementsByClassName("modal-dialog")[0].style.borderBottom = "none";
                                         document.getElementById("reviewTextArea").style.borderBottom = "none";
                                         document.getElementById("reviewTextArea").style.flexDirection = "column";
-                                        setRestaurantCurrentlyAdded(restaurant);
+                                        setRestaurantToBeAdded(restaurant);
                                     }
                                 } >Add Review</button>
 
