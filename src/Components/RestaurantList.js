@@ -11,7 +11,8 @@ const RestaurantList = (props) => {
         restArray,
         restaurants,
         showAllRestaurants,
-        addedRestInfo
+        addedRestInfo,
+        reviewToAddMap
     } = props
 
     const reviewYellowStars = (numberStars, starPosition) => {
@@ -262,15 +263,17 @@ const RestaurantList = (props) => {
                                                     } else if ( addedStarRating === 0 && document.getElementsByTagName("textarea")[0].value === "" ) {
                                                         alert(`Please give a rating and write a review for ${restaurantToBeAdded.name} before submitting your review.`);
                                                     } else if ( addedStarRating > 0 && document.getElementsByTagName("textarea")[0].value !== "" ) {
-                                                        const newReviews = [...totalRestaurantList[restaurantToBeAdded.id - 1].reviews, ...[ 
+                                                        const newReview = [...totalRestaurantList[restaurantToBeAdded.id - 1].reviews, ...[ 
                                                                 {
+                                                                    name: restaurantToBeAdded.name,
                                                                     rating: addedStarRating,
                                                                     text: document.getElementsByTagName("textarea")[0].value
                                                                 } 
                                                             ]
                                                         ]
                                                         setRestaurantCurrentlyAdded(restaurantToBeAdded);
-                                                        setNewReviewsToAdd(newReviews);
+                                                        setNewReviewsToAdd(newReview);
+                                                        reviewToAddMap(newReview);
                                                         document.getElementById("addReviewModal").style.display = "none";
                                                         document.getElementsByTagName("textarea")[0].value = "";
                                                         document.getElementsByTagName("textarea")[0].placeholder = "Add your review here...";
@@ -283,14 +286,18 @@ const RestaurantList = (props) => {
                                 </div>
 
                                 <button type="button" className="btn btn-primary btn-open" onClick={ () => {
-                                        document.getElementById("addReviewModal").style.display = "block";
-                                        document.getElementById("addReviewModal").style.marginTop = "100px";
-                                        document.getElementsByClassName("modal-content")[0].style.border = "2px solid black";
-                                        document.getElementsByClassName("modal-footer")[0].style.borderTop = "1px solid black";
-                                        document.getElementsByClassName("modal-dialog")[0].style.borderBottom = "none";
-                                        document.getElementById("reviewTextArea").style.borderBottom = "none";
-                                        document.getElementById("reviewTextArea").style.flexDirection = "column";
-                                        setRestaurantToBeAdded(restaurant);
+                                        if ( newReviewsToAdd.length > 0 && newReviewsToAdd[newReviewsToAdd.length - 1].name === restaurant.name ) {
+                                            alert("You can only add one review per restaurant.");
+                                        } else {
+                                            document.getElementById("addReviewModal").style.display = "block";
+                                            document.getElementById("addReviewModal").style.marginTop = "100px";
+                                            document.getElementsByClassName("modal-content")[0].style.border = "2px solid black";
+                                            document.getElementsByClassName("modal-footer")[0].style.borderTop = "1px solid black";
+                                            document.getElementsByClassName("modal-dialog")[0].style.borderBottom = "none";
+                                            document.getElementById("reviewTextArea").style.borderBottom = "none";
+                                            document.getElementById("reviewTextArea").style.flexDirection = "column";
+                                            setRestaurantToBeAdded(restaurant);
+                                        }
                                     }
                                 } >Add Review</button>
 
@@ -308,7 +315,8 @@ RestaurantList.propTypes = {
     restArray: PropTypes.func,
     restaurants: PropTypes.array,
     showAllRestaurants: PropTypes.bool,
-    addedRestInfo: PropTypes.array
+    addedRestInfo: PropTypes.array,
+    reviewToAddMap: PropTypes.func
 }
 
 export default RestaurantList;

@@ -12,7 +12,8 @@ const Map = (props) => {
     const {
         restaurants,
         showAllRestaurants,
-        addedRestInfo
+        addedRestInfo,
+        reviewToAddMap
     } = props
 
     const { isLoaded } = useJsApiLoader({
@@ -227,7 +228,15 @@ const Map = (props) => {
             lng: parseFloat(restaurant.long)
         }
         return location; 
-    } 
+    }
+    
+    const newReview = (restaurant) => {
+        if ( reviewToAddMap.length > 0 && restaurant.name === reviewToAddMap[reviewToAddMap.length - 1].name ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     return isLoaded ? (
         <div className="col-md-8 map">
@@ -351,14 +360,31 @@ const Map = (props) => {
                                 </div>
                                 <h5>Reviews</h5>
                                 { 
-                                    displayRestInfo.reviews.map( (review, index) => 
+                                    newReview(displayRestInfo) ? reviewToAddMap.map( (review, index) => 
                                         {
                                             const removeAccents = require("diacritic");
                                             return (
                                                 <div className="restaurantReview" key={index}>
                                                     <div>
                                                         <p><strong>Rating<span>&#x3a;</span></strong></p>
-                                                        <img key={index + 1200} src={star} alt="star" className={ reviewYellowStars(review.rating, 1) } />
+                                                        <img src={star} alt="star" className={ reviewYellowStars(review.rating, 1) } />
+                                                        <img key={index + 1800} src={star} alt="star" className={ reviewYellowStars(review.rating, 2) } />
+                                                        <img key={index + 2400} src={star} alt="star" className={ reviewYellowStars(review.rating, 3) } />
+                                                        <img key={index + 3000} src={star} alt="star" className={ reviewYellowStars(review.rating, 4) } />
+                                                        <img key={index + 3600} src={star} alt="star" className={ reviewYellowStars(review.rating, 5) } />                                           
+                                                    </div>
+                                                    <p><strong>Comment<span>&#x3a;</span></strong><span className="comment"> {removeAccents.clean(review.text)}</span></p>
+                                                </div>
+                                            );
+                                        }
+                                    ) : displayRestInfo.reviews.map( (review, index) => 
+                                        {
+                                            const removeAccents = require("diacritic");
+                                            return (
+                                                <div className="restaurantReview" key={index}>
+                                                    <div>
+                                                        <p><strong>Rating<span>&#x3a;</span></strong></p>
+                                                        <img src={star} alt="star" className={ reviewYellowStars(review.rating, 1) } />
                                                         <img key={index + 1800} src={star} alt="star" className={ reviewYellowStars(review.rating, 2) } />
                                                         <img key={index + 2400} src={star} alt="star" className={ reviewYellowStars(review.rating, 3) } />
                                                         <img key={index + 3000} src={star} alt="star" className={ reviewYellowStars(review.rating, 4) } />
@@ -383,7 +409,8 @@ const Map = (props) => {
 Map.propTypes = {
     restaurants: PropTypes.array,
     showAllRestaurants: PropTypes.bool,
-    addedRestInfo: PropTypes.func
+    addedRestInfo: PropTypes.func,
+    reviewToAddMap: PropTypes.array
 };
 
 export default React.memo(Map);

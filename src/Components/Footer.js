@@ -4,13 +4,8 @@ import martini from "../img/martini.svg"
 import misoSoup from "../img/miso-soup.svg";
 import pizza from "../img/pizza.svg";
 import spaghetti from "../img/spaghetti.svg";
-// import PropTypes from "prop-types";
 
-const Footer = (props) => {
-
-    // const {
-
-    // } = props
+const Footer = () => {
 
     return (
         <footer>
@@ -30,9 +25,5 @@ const Footer = (props) => {
         </footer>
     );
 }
-
-// Footer.propTypes = {
-
-// };
 
 export default Footer;

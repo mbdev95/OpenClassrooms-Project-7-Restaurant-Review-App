@@ -2,11 +2,7 @@ import React from "react";
 // import PropTypes from "prop-types";
 import forkKnife from "../img/fork-and-knife.svg"
 
-const Header = (props) => {
-
-    // const {
-    //     headerText
-    // } = props
+const Header = () => {
 
     return (
 
@@ -25,9 +21,5 @@ const Header = (props) => {
         </header>
     );
 }
-
-// Header.propTypes = {
-
-// };
 
 export default Header;

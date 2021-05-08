@@ -19,7 +19,7 @@ class Restaurants extends Component {
         return (
             <div className="review col-md-4">
                 <Filter filterRestaurants={this.props.filterRestaurants} totalRestaurantArray={this.state.restArray} />
-                <RestaurantList restArray={this.totalRestaurantArray} restaurants={this.props.restaurants} showAllRestaurants={this.props.showAllRestaurants} addedRestInfo={this.props.addedRestInfo} />
+                <RestaurantList restArray={this.totalRestaurantArray} restaurants={this.props.restaurants} showAllRestaurants={this.props.showAllRestaurants} addedRestInfo={this.props.addedRestInfo} reviewToAddMap={this.props.reviewToAddMap} />
             </div>
         );
 
@@ -31,7 +31,8 @@ Restaurants.propTypes = {
     filterRestaurants: PropTypes.func,
     restaurants: PropTypes.array,
     showAllRestaurants: PropTypes.bool,
-    addedRestInfo: PropTypes.array
+    addedRestInfo: PropTypes.array,
+    reviewToAddMap: PropTypes.func
 };
 
 export default Restaurants;
