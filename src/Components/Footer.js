@@ -26,4 +26,5 @@ const Footer = () => {
     );
 }
 
+//Export Footer module to App module
 export default Footer;

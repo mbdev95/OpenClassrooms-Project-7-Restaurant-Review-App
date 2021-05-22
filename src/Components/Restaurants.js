@@ -2,7 +2,6 @@ import React, {Component} from "react";
 import PropTypes from "prop-types";
 import Filter from "./Filter.js";
 import RestaurantList from "./RestaurantList.js";
-import { render } from "@testing-library/react";
 
 class Restaurants extends Component {
 
@@ -10,6 +9,10 @@ class Restaurants extends Component {
         restArray: []
     }
 
+    /* totalRestaurantArray()
+    - ARGUEMENT - The total restaurant array of all the restaurants in the restaurant list.
+    - RESULT - The restArray state will become the arguement array of all the restaurants from the restaurantList. This state will be passed down to the filter and then used as the array which is filtered through.  The array which is filtered thus will include any added restaurants since the array is coming from the restaurantList where added restaurants are added to the total restaurant list array.
+    */
     totalRestaurantArray = (ra) => {
         this.setState( { restArray: ra } );
     }
@@ -35,5 +38,6 @@ Restaurants.propTypes = {
     reviewToAddMap: PropTypes.func
 };
 
+// The Restaurants module is exported to be a part of the Main module.
 export default Restaurants;
 

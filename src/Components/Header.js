@@ -1,5 +1,4 @@
 import React from "react";
-// import PropTypes from "prop-types";
 import forkKnife from "../img/fork-and-knife.svg"
 
 const Header = () => {
@@ -22,4 +21,5 @@ const Header = () => {
     );
 }
 
+// Export Header module to App module.
 export default Header;

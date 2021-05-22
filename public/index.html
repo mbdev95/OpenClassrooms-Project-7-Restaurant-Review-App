@@ -1,3 +1,4 @@
+<!-- HTML for the Restaurant Review Finder application -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -7,8 +8,10 @@
     <title>Restaurant Review Finder</title>
   </head>
   <body>
+    <!-- The whole application is contained in a div with id root.  This div is then rendered to the DOM in index.js. -->
     <div id="root"></div>
     <script>
+      // spinCutlery - A function which causes the cutlery in the header to spin 5 seconds after page load by using a setTimeout function.
       const spinCutlery = () => {
           setTimeout( function(){
               document.querySelector("header div:first-child img[alt$='knife']:nth-child(1)").style.transform = "rotate(180deg)";

@@ -79,7 +79,6 @@ img[src$='knife.svg']:nth-child(2) {
 }
 
 /* Map Restaurant Infowindow */
-
 div[tabindex]:focus {
     outline: none;
 }
@@ -138,7 +137,6 @@ div[tabindex]:focus {
 }
 
 /* Map Add Restaurant Infowindow */
-
 form div label strong {
     font-size: 1.25em;
 }
@@ -182,9 +180,10 @@ div .alert {
 
 .filter img:hover {
     filter: none;
+    cursor: pointer;
 }
 
-/* Review list */
+/* Reviews List */
 .reviewList {
     background: rgba(168, 168, 168, 0.9);
     height: 650px;
@@ -234,7 +233,7 @@ div .alert {
 }
 
 .list-group-item div:first-of-type img {
-    width: 40px;
+    width: 39px;
     margin-bottom: 10px;
 }
 
@@ -314,6 +313,7 @@ div .alert {
 
 .modal-body div div img:hover {
     filter: none;
+    cursor: pointer;
 }
 
 .modal p, .modal label {
@@ -366,7 +366,7 @@ footer img {
     display: none;
 }
 
-/* media queries */
+/* Media Queries */
 @media (min-width: 320px) {
     div .alert {
         font-size: 1em;
@@ -445,6 +445,12 @@ footer img {
         height: 67%;
         border-left: none;
     }
+    .list-group-item div:first-of-type img {
+        width: 27.5px;
+    }
+    .list-group-item div.restaurantReview p img {
+        width: 24px;
+    }
     footer p {
         font-size: 0.95em;
     }
@@ -465,11 +471,17 @@ footer img {
 }
 
 @media (min-width: 992px) {
-    footer img {
-        width: 50px;
-    }
     .filter div:first-of-type {
         font-size: 1.1em;
+    }
+    .list-group-item div:first-of-type img {
+        width: 40px;
+    }
+    .list-group-item div.restaurantReview p img {
+        width: 28px;
+    }
+    footer img {
+        width: 50px;
     }
 }
 

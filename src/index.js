@@ -1,3 +1,4 @@
+// import application module and render the appliction module to the DOM
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.css';
