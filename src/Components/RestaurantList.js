@@ -33,7 +33,7 @@ const RestaurantList = (props) => {
     // A boolean value which if true indicates the total restaurant list array has been created from the api get request.
     const [totalRestaurantListBool, setTotalRestaurantListBool] = React.useState(false);
 
-    //The useEffect will be executed every time the filter is used or a new restaurant is added via the form by the make this useEffect dependent on the restArray prop.
+    //The useEffect will be executed every time a new restaurant is added via the form by the make this useEffect have an empty dependency array.
     React.useEffect( () => 
 
         {
@@ -159,7 +159,7 @@ const RestaurantList = (props) => {
                 }                
             }
             handleRestaurantSearch();
-        }, [restArray]
+        }, []
 
     );
 
