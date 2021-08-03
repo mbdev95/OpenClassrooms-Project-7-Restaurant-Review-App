@@ -3,7 +3,7 @@
   "homepage": "https://mbdev95.github.io/OpenClassrooms-Project-7-Restaurant-Review-App/",
   "version": "0.1.0",
   "private": true,
-  "dependencies": 
+  "dependencies": {
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-geolocated": "^3.1.0",
