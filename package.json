@@ -4,10 +4,17 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@react-google-maps/api": "^2.1.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-geolocated": "^3.1.0",
     "react-scripts": "4.0.3",
+    "@testing-library/jest-dom": "^5.11.9",
+    "@testing-library/react": "^11.2.5",
+    "@testing-library/user-event": "^12.7",
+    "axios": "^0.21.1",
+    "diacritic": "^0.0.2",
+    "web-vitals": "^1.1.0",
     "bootstrap": "^4.6.0"
   },
   "scripts": {
