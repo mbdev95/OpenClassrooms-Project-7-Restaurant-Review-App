@@ -12,6 +12,8 @@ https://mbdev95.github.io/OpenClassrooms-Project-7-Restaurant-Review-App/
 ## User-Interface
 ![Restaurant-Review-Finder-User-Interface](https://user-images.githubusercontent.com/77469447/128112031-ee9e2188-d676-4cef-b2ea-d829617f0747.PNG)
 
+The user-interface was all rendered within the various components of the react element.  Each component returns JSX, reacts version of html, which is then rendered to the DOM via the index.js file.  The interface created starts with a parent component, which then holds the JSX of child components, and further child components.  In my app the parent component called App holds the JSX from the Header, Footer, and Main components.  The main component contains the Map and Restaurants components.  The Restaurants component holds the JSX from the Filter and RestaurantList components.  Thus, in my application 
+
 ## Using React
 ![Add-Review-Form](https://user-images.githubusercontent.com/77469447/128111719-009da3f8-1a60-4c46-a5a3-bc397bed9aba.PNG)
 
