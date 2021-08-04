@@ -31,4 +31,4 @@ I used Google Map's APIs to obtain data pertaining the restaurants within a give
 ![Add-New-Restaurant-Form](https://user-images.githubusercontent.com/77469447/128225497-b5977afb-805b-46e8-8bbb-a5e63bb48c6e.PNG)
 
 ## Conclusion
-
+In conclusion, my seventh project in my OpenClassrooms Front-End developer path taught a new way to create JavaScript application more organized, effectivly and concisly by taking advantage of React. In addition, I used Google Maps APIs to obtain all the required information to make my Restaurant Review app function properly. I was also able to use react to communicate and render the data to the necessary areas of my application.  I am greatful to have added React and APIs as another tool in my ever expanding developer tool kit. 
