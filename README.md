@@ -4,7 +4,7 @@
 
 ### Click the link below to go see the app online:
 
-*** The restaurant review locator accessable below has no api keys for security reasons. Only the design of the App is visible since the api's required to generate the restaurants will not be operating.
+*** The restaurant review locator accessible below has no api keys for security reasons. Only the design of the App is visible since the api's required to generate the restaurants will not be operating.
 
 https://mbdev95.github.io/OpenClassrooms-Project-7-Restaurant-Review-App/
 
