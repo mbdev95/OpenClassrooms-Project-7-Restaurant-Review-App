@@ -321,9 +321,7 @@ const Map = (props) => {
                 onClick={ event =>  
                     { 
                         setDisplayRestInfo(null);
-                        if ( event.Va !== undefined ) {
-                            setAddRestaurantForm(event.latLng);
-                        } 
+                        setAddRestaurantForm(event.latLng);
                     }
                 }
                 onDrag={ () => 
