@@ -21,5 +21,7 @@ https://mbdev95.github.io/OpenClassrooms-Project-7-Restaurant-Review-App/
 ## Using Google Maps APIs
 ![User-Location](https://user-images.githubusercontent.com/77469447/128111516-62ea14d7-7266-4052-8870-133fbb51f0a2.PNG)
 
+![Add-New-Restaurant-Form](https://user-images.githubusercontent.com/77469447/128225497-b5977afb-805b-46e8-8bbb-a5e63bb48c6e.PNG)
+
 ## Conclusion
 
