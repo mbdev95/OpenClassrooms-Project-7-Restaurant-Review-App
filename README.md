@@ -23,7 +23,7 @@ I will now discuss how I used react to create an organized flow of data in my ap
 
 
 
-## Using Google Maps APIs
+## Using Google Maps' APIs
 ![User-Location](https://user-images.githubusercontent.com/77469447/128111516-62ea14d7-7266-4052-8870-133fbb51f0a2.PNG)
 
 I used Google Maps APIs to obtain data pertaining to the restaurants within a given area.  The data obtained included names, addresses, reviews,  GPS coordinates and ratings.  The GPS coordinates were used to render blue markers at the location of each restaurant.  When the blue markers are clicked on an infowindow appears which displays many of the other data returned from the API get requests to Google.  Moreover, in the RestaurantList each restaurant's information is also populated with data from a Google Maps API get request.  The API requests return an array which I iterated through and rendered the data to the DOM.   The above image shows the user location, which was found using the browser built-in geolocation property, and the location of restaurants, blue markers, determined by the GPS coordinates returned from an API get request to Google Maps.  In the first image on the page, the user-interface image, you can see the RestaurantList on the right side, and an infowindow, which both contain information obtained via Google Maps' APIs, the Google Places' API specifically.   Finally, the image below shows an add restaurant form which appears when a user clicks on the map.  The location the infowindow appears is based on Google Maps click event's latlng property.  I was able to use Google Maps' APIs to successfully obtain the information required to show each restaurant's information accurately.
