@@ -1,6 +1,7 @@
 # Restaurant Review Locator
 
 ## Introduction
+For my seventh project of the OpenClassrooms Front-End developer course I created a restaurant review locator app using React, CSS and REST APIs. The goals of the project were to use enhance my previous experience with object-oriented JavaScript from Project 6 to create an application with react.  Secondarily, another goal was to learn how to import data using REST APIs, and then render the imported data to the page depending on events instantiated by the user.  This project taught me the importance of using Javascript libraries and REST APIs to increase the capablities of the functionality of my apps. 
 
 ### Click the link below to go see the app online:
 
