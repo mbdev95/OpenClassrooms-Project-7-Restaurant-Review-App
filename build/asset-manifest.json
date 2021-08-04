@@ -1,0 +1,32 @@
+{
+  "files": {
+    "main.css": "/OpenClassrooms-Project-7-Restaurant-Review-App/static/css/main.47b16e73.chunk.css",
+    "main.js": "/OpenClassrooms-Project-7-Restaurant-Review-App/static/js/main.daf55bad.chunk.js",
+    "main.js.map": "/OpenClassrooms-Project-7-Restaurant-Review-App/static/js/main.daf55bad.chunk.js.map",
+    "runtime-main.js": "/OpenClassrooms-Project-7-Restaurant-Review-App/static/js/runtime-main.cfde83ca.js",
+    "runtime-main.js.map": "/OpenClassrooms-Project-7-Restaurant-Review-App/static/js/runtime-main.cfde83ca.js.map",
+    "static/css/2.d5e620ed.chunk.css": "/OpenClassrooms-Project-7-Restaurant-Review-App/static/css/2.d5e620ed.chunk.css",
+    "static/js/2.2b80fef7.chunk.js": "/OpenClassrooms-Project-7-Restaurant-Review-App/static/js/2.2b80fef7.chunk.js",
+    "static/js/2.2b80fef7.chunk.js.map": "/OpenClassrooms-Project-7-Restaurant-Review-App/static/js/2.2b80fef7.chunk.js.map",
+    "static/js/3.3d5d0592.chunk.js": "/OpenClassrooms-Project-7-Restaurant-Review-App/static/js/3.3d5d0592.chunk.js",
+    "static/js/3.3d5d0592.chunk.js.map": "/OpenClassrooms-Project-7-Restaurant-Review-App/static/js/3.3d5d0592.chunk.js.map",
+    "index.html": "/OpenClassrooms-Project-7-Restaurant-Review-App/index.html",
+    "static/css/2.d5e620ed.chunk.css.map": "/OpenClassrooms-Project-7-Restaurant-Review-App/static/css/2.d5e620ed.chunk.css.map",
+    "static/css/main.47b16e73.chunk.css.map": "/OpenClassrooms-Project-7-Restaurant-Review-App/static/css/main.47b16e73.chunk.css.map",
+    "static/js/2.2b80fef7.chunk.js.LICENSE.txt": "/OpenClassrooms-Project-7-Restaurant-Review-App/static/js/2.2b80fef7.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/OpenClassrooms-Project-7-Restaurant-Review-App/static/media/checkered-cloth.146f4ed5.jpg",
+    "static/media/fork-and-knife.df9508ff.svg": "/OpenClassrooms-Project-7-Restaurant-Review-App/static/media/fork-and-knife.df9508ff.svg",
+    "static/media/martini.a1616c3f.svg": "/OpenClassrooms-Project-7-Restaurant-Review-App/static/media/martini.a1616c3f.svg",
+    "static/media/miso-soup.8c7157a6.svg": "/OpenClassrooms-Project-7-Restaurant-Review-App/static/media/miso-soup.8c7157a6.svg",
+    "static/media/pizza.df5d1179.svg": "/OpenClassrooms-Project-7-Restaurant-Review-App/static/media/pizza.df5d1179.svg",
+    "static/media/spaghetti.c4a046f8.svg": "/OpenClassrooms-Project-7-Restaurant-Review-App/static/media/spaghetti.c4a046f8.svg",
+    "static/media/star.3e8d035f.svg": "/OpenClassrooms-Project-7-Restaurant-Review-App/static/media/star.3e8d035f.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.cfde83ca.js",
+    "static/css/2.d5e620ed.chunk.css",
+    "static/js/2.2b80fef7.chunk.js",
+    "static/css/main.47b16e73.chunk.css",
+    "static/js/main.daf55bad.chunk.js"
+  ]
+}
