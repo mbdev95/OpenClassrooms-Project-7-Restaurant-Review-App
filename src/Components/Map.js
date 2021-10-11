@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import {GoogleMap, Marker, useJsApiLoader, InfoWindow} from '@react-google-maps/api';
 import axios from 'axios';
-import JSONRestaurants from "../restaurants.json";
 import star from "../img/star.svg";
  
 const Map = (props) => {
