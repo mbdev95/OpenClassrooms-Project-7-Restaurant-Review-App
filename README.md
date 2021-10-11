@@ -7,7 +7,7 @@ For my seventh project of the OpenClassrooms Front-End Developer course I create
 
 https://mbdev95.github.io/OpenClassrooms-Project-7-Restaurant-Review-App/
 
-*** The Restaurant Review Locator accessible below has only the design of the App visible since the API's required to generate the restaurants will not be operating for security reasons.
+*** The Restaurant Review Locator accessible below has only the design of the App visible since the API's required to generate the restaurants will not be operating since billing has been disabled.
 
 ### Skills Used:
 - React.js
