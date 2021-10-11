@@ -15,6 +15,7 @@ https://mbdev95.github.io/OpenClassrooms-Project-7-Restaurant-Review-App/
 - JavaScript
 - CSS3
 - HTML5
+- -JSON
 
 ## User-Interface
 ![Restaurant-Review-Finder-User-Interface](https://user-images.githubusercontent.com/77469447/128112031-ee9e2188-d676-4cef-b2ea-d829617f0747.PNG)
