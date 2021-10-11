@@ -104,7 +104,7 @@ const Map = (props) => {
                     }
                 );
                 const finalRestaurantArray = [...JSONRestaurants, ...refinedGoogleRestaurants];
-                setTotalRestaurantList(finalRestaurantArray);
+                setTotalRestaurantList(refinedGoogleRestaurants);
             };
 
     /* handleRestaurantSearch()
