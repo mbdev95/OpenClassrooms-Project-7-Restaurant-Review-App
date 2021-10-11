@@ -1,7 +1,6 @@
 import React from "react";
 import axios from 'axios';
 import PropTypes from "prop-types";
-import JSONRestaurants from "../restaurants.json";
 import Star from "../img/star.svg";
 
 const RestaurantList = (props) => {
@@ -92,8 +91,7 @@ const RestaurantList = (props) => {
                         )
                     }
                 );
-                const finalRestaurantArray = [...JSONRestaurants, ...refinedGoogleRestaurants];
-                setTotalRestaurantList(finalRestaurantArray);
+                setTotalRestaurantList(refinedGoogleRestaurants);
                 setTotalRestaurantListBool(true);
                 restArray(finalRestaurantArray);
             };
