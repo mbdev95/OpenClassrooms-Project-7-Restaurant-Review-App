@@ -420,7 +420,7 @@ footer img {
         height: 100%;
     }
     .filter {
-        height: 33%;
+        height: 40%;
         border-top: solid black 3px;
         border-left: none;
     }
@@ -442,7 +442,7 @@ footer img {
         padding: 0px;
     }
     div .reviewList {
-        height: 67%;
+        height: 60%;
         border-left: none;
     }
     .list-group-item div:first-of-type img {
