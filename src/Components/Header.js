@@ -11,7 +11,7 @@ const Header = () => {
                 <img src={forkKnife} alt="fork and knife" />
                 <img src={forkKnife} alt="fork and knife" />
             </div>
-            <h1>Restaurant Review Finder</h1>
+            <h1>Restaurant Review Locator</h1>
             <div>
                 <img src={forkKnife} alt="fork and knife" />
                 <img src={forkKnife} alt="fork and knife" />
