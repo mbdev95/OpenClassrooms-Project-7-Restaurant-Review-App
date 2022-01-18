@@ -129,7 +129,7 @@ const RestaurantList = (props) => {
                         const location = `location=${latitude},${longitude}`;
                         const radius = `&radius=2000`;
                         const type = `&type=restaurant`;
-                        const key = `&key=hiddenKey`;
+                        const key = `&key=key`;
                         const restaurantSearchUrl = url + location + radius + type + key;
                         axios.get("https://secret-ocean-49799.herokuapp.com/" + restaurantSearchUrl)
                         .then(response => {  
@@ -139,7 +139,7 @@ const RestaurantList = (props) => {
                                 const place_id = `place_id=${restaurant.place_id}`;
                                 const fields = `&fields=name,place_id,address_component,geometry,rating,review`;
                                 const language =`&language=en`;
-                                const key = `&key=hiddenKey`
+                                const key = `&key=key`
                                 const restaurantReviewsSearch = url + place_id + fields + language + key;
                                 axios.get("https://cors-mbdev.herokuapp.com/" + restaurantReviewsSearch)
                                 .then(resp => {
