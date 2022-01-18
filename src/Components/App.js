@@ -6,8 +6,6 @@ import Footer from "./Footer.js";
 
 class App extends Component {
   
-  window.addEventListener('load', () => alert('Please note the Google Places API used to obtain restaurant information is no longer active for security reasons.'));
-
   render() {
 
     // returns header, main - map / restaurants - filter / restaurantList
