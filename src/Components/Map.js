@@ -16,7 +16,7 @@ const Map = (props) => {
     // Loads the google maps JS Api after html and css has loaded to ensure the user views a web page before loading the api.
     const { isLoaded } = useJsApiLoader({
        id: 'restaurant-locator-308917',
-       googleMapsApiKey: "hiddenKey"
+       googleMapsApiKey: "key"
     })
 
     // The map height and width is set to 100% of it's parent's height and width.
@@ -139,7 +139,7 @@ const Map = (props) => {
                         const location = `location=${latitude},${longitude}`;
                         const radius = `&radius=2000`;
                         const type = `&type=restaurant`;
-                        const key = `&key=hiddenKey`;
+                        const key = `&key=key`;
                         const restaurantSearchUrl = url + location + radius + type + key;
                         axios.get("https://secret-ocean-49799.herokuapp.com/" + restaurantSearchUrl)
                         .then(response => {  
@@ -149,7 +149,7 @@ const Map = (props) => {
                                 const place_id = `place_id=${restaurant.place_id}`;
                                 const fields = `&fields=name,address_component,geometry,rating,reviews`;
                                 const language =`&language=en`;
-                                const key = `&key=hiddenKey`;
+                                const key = `&key=key`;
                                 const restaurantReviewsSearch = url + place_id + fields + language + key;
                                 axios.get("https://cors-mbdev.herokuapp.com/" + restaurantReviewsSearch)
                                 .then(resp => {
@@ -404,7 +404,7 @@ const Map = (props) => {
                                         const url = `https://maps.googleapis.com/maps/api/streetview?`;
                                         const size = `size=210x180`;
                                         const location = `&location=${restaurant.address}`;
-                                        const key = `&key=hiddenKey`;
+                                        const key = `&key=key`;
                                         const restaurantImage = url + size + location + key;
                                         setDisplayRestPhoto(restaurantImage);
                                         setAddRestaurantForm(null);
