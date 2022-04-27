@@ -22,10 +22,7 @@ class Filter extends Component {
             }
         }
 
-        // Every time an image is clicked the filterRestaurants() function from the Main module is called with the arguements of the rating, totalRestaurantArray() including any added restaurants, and a boolean value of false.
-        // The showAllRestaurants boolean value of false is used in the Map and RestaurantList in the condition which decides which array to render which will either render all the restaurants or an array of filtered restaurants. 
-        // When the "Show All Restaurants" button is clicked filterRestaurants recieves a rating of 0 and boolean value of true to indicate no rating was selected and since the boolean value for showing all restaurants is true the condition to use the array in the Map and RestaurantList which includes every restaurants will pass causing all restaurants to appear in the RestaurantList module and on the Map module.
-        // Also, when the "Show All Restaurants" button is clicked the starPosition is set to zero causing all stars to appear unhighlighted and blank since the filter is not being used.
+        // Every time a star image is clicked the filterRestaurants() function from the Main module is called in order to filter the restaurants in the Map and Restaurant List component on the basis of their star rating.
         return (
             <div className="filter">
                 <h2>Filter Restaurants</h2>
