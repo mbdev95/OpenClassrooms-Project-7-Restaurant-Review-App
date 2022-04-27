@@ -172,9 +172,6 @@ const RestaurantList = (props) => {
     
     /* filteredRestaurantsArray() 
     - RESULTS - A condition to determine which array of restaurant information will be iterated through to show all the restaurants in the list.
-        - Condition 1 determines if the filter has been used, and if the rating selected matches the rating of any restaurants. If true the restaurants which have the same rating as the rating selected will be returned.
-        - Condition 2 determines if the filter has been used, and will only be true if the rating selected yields no restaurants, thus returning an empty array.
-        - Condition 3 determines if the filter has been used, and will only be true if the filter was not used returning all the restaurants.
     */
     const filteredRestaurantsArray = () => {
         if ( restaurants.length > 0 && showAllRestaurants === false ) {
@@ -229,15 +226,7 @@ const RestaurantList = (props) => {
             <h2>Restaurants</h2>
             <ul className="list-group">
     {/* filteredRestaurantsArray()
-    - RESULT - A ternary expression is used to determine if the totalRestaurantList is loaded from the api get requests before loading the page to avoid an undefined error.
-        - The filteredRestaurantsArray represents an array representing the restaurants based on 3 conditions determining if the array has been filtered, if the filter has yielded any restaurants, or if the filter has been used at all, in which case all restaurants will be returned.
-        - The restaurantReviews() function returns an array of reviews which will either include any added reviews, or include just the original reviews if the condition in the function determines that no reviews were added for the particular restaurant in the current iteration filteredRestaurantsArray() function's returned array.
-        - If the add review button is clicked a modal window will appear with a form to add a review for the restaurant the add review button was a part of.  The restaurantToBeAdded state will be updated to the current iteration of the restaurant in the filteredRestaurantsArray() array.  Also a condition will determine if a review to the restaurant has been added and if so the user will be alerted they are not able to add multiple reviews to one restaurant.  The modal window opens by setting the css display value using JS from none to block for the modal window div.
-        - If the modal window add review button is clicked and either one or both of the form fields have no text or selection then an alert stating both form fields need to be completed will appear.
-        - If the modal window add review button is clicked and both form fields are completed and a restaurant has a rating of two then the rating for that review will become the overall rating since there will only be one rating for an added restaurant. This is achieved by updating the rating property of the added restaurant which had a review added from zero to the rating given by the user.
-        - If the modal window add review button is clicked and both form fields are completed then filter will recieve the updated array including the newly added overall rating for the added restaurant.
-        - If the modal window add review button is clicked and both form fields are completed then the new review will be added into one array in combination with the existing restaurant's reviews.  The updated restaurant's review array will then be added to any existing restaurant's reviews which have had one restaurant review added.  The combined array of all the restaurants reviews which have had one review added will be set as the state for newReviewsToAdd and additonally passed to the map component as the arguement in the function reviewToAddMap().
-        - Upon the closing of the modal window css is manipulated using JS directly to have the modal window display change to none.  Also, the addedStarRating state is set to zero when the modal window is closed or the modal window add review button is clicked so when the modal window reopens the stars appear at zero.   
+    - RESULT - The restaurant list is rendered with the data from the google API as long as API get request has been fully resolved. 
      */}
                 {   
                     totalRestaurantListBool ? filteredRestaurantsArray().map((restaurant, index) => {
@@ -373,5 +362,4 @@ RestaurantList.propTypes = {
     reviewToAddMap: PropTypes.func
 }
 
-//RestaurantList module is exported to the Restaurants module
 export default RestaurantList;
