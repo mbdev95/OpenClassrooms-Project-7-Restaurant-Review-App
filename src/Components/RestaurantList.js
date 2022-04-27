@@ -38,12 +38,8 @@ const RestaurantList = (props) => {
         {
     /* combinedRestaurantArrays()
         - Arguement - googlePlacesRestaurants - An array of restaurant's objects loaded from the googlePlacesApi which is loaded using the restaurants googlePlaces id loaded from the google maps Api.
-        - Results - The googlePlacesRestaurants array is maped through returning an array of objects to the refinedGoogleRestaurants variable, and contains all the required information for the restaurant's marker's location and the restaurant's infowindow.
-        - The address is formed by taking the minimum address length and then concacting the remainder of the address components on the basis of the number of address components remaining.
-        - The restaurantReviews object includes the name of the restaurant being reviewed because this name will be needed in a condition comparing the review's restaurant's name with all the restaurant's which have had restaurant's added in order to determine which array of reviews should be rendered to the DOM for each restaurant.
-        - The JSON restaurants and google api restaurants are combined into one array using the spread operator.  The resulting array then becomes the state for totalRestaurantList.
-        - The totalRestaurantListBool value has been set to true since the api's have loaded all of the information for each restaurant and totalRestaurantList state has been updated with the array containing the restaurant information.  Thus, the restaurantList is ready to be rendered since totalRestaurantList is now an iterable defined array.
-        - The restArray prop function takes the value of the totalRestaurants as it's arguement which will then be passed to the filter, and used as another arguement in the filter function to give the filterfunction in Main the most up to date restaurant information, including restaurants just added.  
+        - Results - An array of objects containing each restaurant's data from the Google Places API is set to state as refined restaurants.
+        - The array of restaurant data is also passed up to the parent Main component via the callback function restArray().
     */
             const combinedRestaurantArrays = (googlePlacesRestaurants) => {
                 const removeAccents = require("diacritic");
@@ -112,13 +108,9 @@ const RestaurantList = (props) => {
                     }
                 }
 
-    // If geolocation is present in the browser then the googleMaps Api is executed.
-    // The latitude and longitude variables are set to there values given from the position arguement passed into the function using the browser's geolocation feature.
-    // A google maps api uses the latitude and longitude variables to determine the location from which to locate the restaurants.  The radius is set to 2000 meters and the type is set to restaurant.  The api key is provided and axios is used in conjunction with a get request to return an array of restaurants with a place ID.
+    // A couple of API get requests are made to Google to obtain data about restaurants within 2000m of the user.
+    // This array of data is passed to the combinedRestaurantArrays function where the data formatted into an array of restaurant objects.
     // Herokuapp's server is used to avoid the cors error for the google maps api request and for the google places api request I created my own server "cors-mbdev" to deal with any cors errors since the app's requests exceeded the minimum allowed by herokuapp. 
-    // A new array is initialized and the results of the previous google maps api are iterated through.  The place id is used in each iteration to target and return more information from each restaurant which is then pushed into the initialized array.
-    // The arrayRest has the length of the initial array from google maps api then the array rest has all the restaurants information and thus this array is passed to combinedRestaurantArrays so this array can be used to ultimately update the totalRestaurantList.
-    // If the promise recieves an error the error is logged to the console, and if geolocation does not work an alert appears informing the user their browser does not have geolocation.
                 let latitude;
                 let longitude;
                 if ( navigator.geolocation ) {
@@ -208,9 +200,7 @@ const RestaurantList = (props) => {
     /* restaurantReviews()
     - ARGUEMENT - restaurant - The restaurant information object pertaining to the marker that was clicked on.
     - RESULT - The reviewToAddMap prop contains any newly added reviews plus any other existing reviews from the restaurant which had a review added by the user.
-        - The reviewToAddMap is filtered on the basis of the restaurant whose marker was clicked on's name and the name of the restaurant which has had a review added being the same. If the same then all the reviews from the restaurant with added review will be placed in the reviewsToAddToCurrentRestaurant variable.
-        - If reviews were added to the restaurant being iterated through then the reviewsToAddToCurrentRestaurant array is returned and the reviews including the review added by the user are rendered to the restaurant's infowindow.
-        - If no reviews were added to the restaurant being iterated through then the restaurant's original reviews are returned without any additional reviews.
+        - If the reviewToAddMap is defined with a length greater then zero this array containing additional and previous reviews is used, otherwise the array containing already existing reviews is used.
     */
     const restaurantReviews = (restaurant) => {
         const reviewsToAddToCurrentRestaurant = newReviewsToAdd.filter(review => restaurant.name === review.restName);
