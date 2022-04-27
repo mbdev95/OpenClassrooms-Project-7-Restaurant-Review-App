@@ -54,10 +54,7 @@ const Map = (props) => {
     // The state of the totalRestaurantList used to hold all the restaurant's information in objects is initialized to an empty array.
     const [totalRestaurantList, setTotalRestaurantList] = React.useState([]);
     
-    // The useEffect react hook is used to load each restaurant as an object with information obtained from the google maps API, and subsequently the google places api upon page load once the google map has mounted for the first time.  
-    // The useEffect hook only runs once due to the empty dependency array.
     React.useEffect( () => 
-
         {
     /* combinedRestaurantArrays()
     - Arguement - googlePlacesRestaurants - An array of restaurant's obejcts loaded from the googlePlacesApi which is loaded using the restaurants googlePlaces id loaded from the google maps Api.
@@ -106,7 +103,7 @@ const Map = (props) => {
             };
 
     /* handleRestaurantSearch()
-        - RESULT - The combinedRestaurantArray() function is called with an array of objects containing each restaurants required information is passed through as the arguement.
+        - RESULT - The combinedRestaurantArray() function is called with an array of objects containing each restaurant's required information being passed through as the arguement.
             -Immediantly after this function declaration the handleRestaurantSearch() function is called inorder to have the function executed once upon the first rendering of the map component.
     */
             const handleRestaurantSearch = () => {
@@ -292,10 +289,7 @@ const Map = (props) => {
 
     /* restaurantReviews()
     - ARGUEMENT - restaurant - The restaurant information object pertaining to the marker that was clicked on.
-    - RESULT - The reviewToAddMap prop contains any newly added reviews plus any other existing reviews from the restaurant which had a review added by the user.
-        - The reviewToAddMap is filtered on the basis of the restaurant whose marker was clicked on's name and the name of the restaurant which has had a review added being the same. If the same then all the reviews from the restaurant with added review will be placed in the reviewsToAddToCurrentRestaurant variable.
-        - If reviews were added to the restaurant being iterated through then the reviewsToAddToCurrentRestaurant array is returned and the reviews including the review added by the user are rendered to the restaurant's infowindow.
-        - If no reviews were added to the restaurant being iterated through then the restaurant's original reviews are returned without any additional reviews.
+    - RESULT - Any new restuarant reviews are returned, otherwise the already existing reviews are returned.
     */
     const restaurantReviews = (restaurant) => {
         const reviewsToAddToCurrentRestaurant = reviewToAddMap.filter(review => restaurant.name === review.restName);
@@ -340,9 +334,8 @@ const Map = (props) => {
                 />
 
     {/* -The addRestaurantForm's location comes from the map click event position value stored in the addRestaurantForm state. 
-    - The submit event default of page reload is prevented and an alert tells the user to fill in all form fields if any fields have zero text.
     - When the submit button is clicked, if all the form fields have text then an array with an object pertaining to the information of the restaurant to be added is created and set to be the state for addedRestInfoForMap and addedRestInfo which will upon a rerender cause both the map and restaurantList to be updated with the new restaurant.
-    - The addRestaurantForm state will be set to null closing the add restaurant form window upon the submit button being clicked. */}
+    - The addRestaurantForm state will be set to null, closing the add restaurant form window upon the submit button being clicked. */}
                 {
                     addRestaurantForm && (
                         <InfoWindow
@@ -390,7 +383,7 @@ const Map = (props) => {
     {/* - The returned array from the filteredRestaurantsArray() function is iterated through using the map method.  
     - For each iteration a marker will appear on the map at the location specified by the location function's returned location value, either a lat lng or a click events position property depending on if the restaurant was added by the user or came from an api get request. 
     - A click event listener is added to each marker which when cliked will set displayRestInfo from null to the restaurant's information object of that iteration, and will generate an image of the restaurant of the current iteration to be used in the infowindow. Any current restaurant infowindows that are open will be closed by setting addRestaurantForm to null.
-    - The marker icon attribute is given a url to make the marker blue to distinguish the marker from the user location's marker*/}
+    - The marker icon attribute is given a url to make the marker blue to distinguish the marker from the user location's red marker*/}
                 {
                     filteredRestaurantsArray().map((restaurant, index) => {
 
@@ -422,10 +415,10 @@ const Map = (props) => {
                         )
                     })
                 }
-    {/* - The position comes from the return value of the location() function which will be either a lat lng or a click events position property depending on if the restaurant was added by the user or came from an api get request. 
+    {/* 
     - The displayRestInfo is set to the restaurant's marker that was clicked on's restaurant's info object.  This state is then used to give the information needed for the restaurant's information in the display restaurant form.
     - The displayRestPhoto holds the url of the google street image for the marker's restaurant that was clicked on. 
-    - The reviews displayed for the restaurant will either come from an array of reviews including the added review if the reviewToAddMap prop has a value and the value's restaurant name corresponds to the displayRestInfo's restaurant's name or else the restaurantReviews() function returns false then simply an array of the reviews from displayRestInfo will be iterated through and returned. */}
+    - The reviews displayed for a restaurant will be rendered with any added reviews.*/}
                 {
                     displayRestInfo && (
                         <InfoWindow
@@ -482,5 +475,4 @@ Map.propTypes = {
     reviewToAddMap: PropTypes.array
 };
 
-// The Map component is exported to the Main component.
 export default React.memo(Map);
